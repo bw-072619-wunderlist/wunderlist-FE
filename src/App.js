@@ -10,9 +10,6 @@ import Login from './components/Login/Login'
 function App() {
   return (
     <div className="app-container">
-      <header className="app-header">
-        TASK App
-      </header>
       <Route exact path="/" component={Home} />
       <Route exact path="/login" component={Login} />
     </div>
