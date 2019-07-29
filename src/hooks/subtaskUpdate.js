@@ -17,10 +17,16 @@ export default (initVal) => {
         });
         const updatedSubtask = {...subtasks[target], ...newVersion};
         const oldOmitted = subtasks.filter(oldItem => oldItem.id !== newVersion.id);
-        const pending = oldOmitted.slice(0, subtasks.findIndex(i => !i.completed))
-        const finished
+        const finishedThreshold = subtasks.findIndex(i => !i.completed);
+        const pending = oldOmitted.slice(0, finishedThreshold);
+        const finished = oldOmitted.slice(finishedThreshold);
         if (updatedSubtask.completed) {
-
+            finished.unshift(updatedSubtask);
+        } else {
+            pending.unshift(updatedSubtask);
         }
+        setSubtasks(pending.concat(finished));
     }
+
+    return [subtasks, updateSubtask];
 };
