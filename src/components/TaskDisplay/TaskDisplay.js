@@ -8,15 +8,18 @@ export default () => {
         function compareSubtasks(a, b) {
             // console.log(a.completed, b.completed, +a.completed > +b.completed)
             if (+a.completed > +b.completed) {
-                return -1;
-            } else if (+a.completed > +b.completed) {
+                console.log('ueoahtn')
                 return 1;
+            } else if (+a.completed < +b.completed) {
+                console.log('two')
+                return -1;
             } else {
+                console.log('tri')
                 return 0;
             }
         }
 
-        console.log([...unsorted].sort(compareSubtasks).map(t => t.completed))
+        // console.log([...unsorted].sort(compareSubtasks).map(t => t.completed))
 
         return [...unsorted].sort(compareSubtasks);
     }
@@ -27,6 +30,8 @@ export default () => {
         axios
             .get('https://my.api.mockaroo.com/todos.json', { headers })
             .then(res => {
+                const sorted = sortedSubtasks(res.data);
+                console.log(res.data.map((thing, index) => thing.title === sorted[index].title))
                 setSubtasks(sortedSubtasks(res.data));
             })
             .catch(console.log);
