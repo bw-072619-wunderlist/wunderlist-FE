@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Redirect, Link } from 'react-router-dom'
 import axios from 'axios';
 import { Button, Form, Input } from 'semantic-ui-react';
 
+import { UserContext } from '../../contexts/UserContext';
+
 import './Login.scss';
 
 const Login = (props) => {
+  // const { user } = useContext(UserContext)
+
   const [login, setLogin] = useState({
     email: '',
     password: ''
@@ -25,6 +29,7 @@ const Login = (props) => {
       .then(response => {
         console.log(response)
         setLoading(false)
+        // user(response.data)
         localStorage.setItem('token', response.data.token)
       })
       .then(props.history.push('/'))
