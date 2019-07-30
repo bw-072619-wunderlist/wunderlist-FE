@@ -1,8 +1,9 @@
-import React, { useState, Component } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Accordion, Icon, Image, Checkbox } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import './sideNav.scss';
+import NavBar from './UpperNav';
 
 
 export default function AccordionExampleStandard(props) {
@@ -23,46 +24,52 @@ export default function AccordionExampleStandard(props) {
         setPerson({ ...person, 'notification': !notification });
     }
 
-        return (
-            <Accordion>
-                <Accordion.Title active={activeIndex === 0} index={0} onClick={handleClick}>
-                    <Image src='https://react.semantic-ui.com/images/avatar/large/rachel.png' avatar />
-                    Kayla_Rae
+    return (
+        <div>
+        <NavBar />
+        <Accordion>
+            <div className="sideNavButtons">
+            <Accordion.Title active={activeIndex === 0} index={0} onClick={handleClick}>
+                <Image src='https://react.semantic-ui.com/images/avatar/large/rachel.png' avatar />
+                Kayla_Rae
                     <Icon name='angle down' />
                 </Accordion.Title>
-                <Accordion.Content active={activeIndex === 0}>
+                <Accordion.Content active={activeIndex === 0} className="profileCard">
                     <Link to='/profile/edit'>Edit Profile</Link>
                     <div>Get Email notifications</div>
-                    <label>Off</label>
-                    <Checkbox toggle checked={person.notification} name='notification' onChange={() => toggleNotification(person.notification)} />
-                    <label>On</label>
+                    <div className="toggleDiv">
+                        <label className="toggleLabel">Off</label>
+                        <Checkbox toggle checked={person.notification} name='notification' onChange={() => toggleNotification(person.notification)} />
+                        <label className="toggleLabel">On</label>
+                    </div>
                     <div>kayla.rae@example.com</div>
                     <Link to='#'>Sign Out</Link>
                 </Accordion.Content>
-
                 <Accordion.Title active={activeIndex === 1} index={1} onClick={handleClick}>
                     HOME
                  </Accordion.Title>
-                <Accordion.Content active={activeIndex === 1}>
-                    <p>List 1</p>
-                    <p>List 2</p>
-                </Accordion.Content>
+                {/* <Accordion.Content active={activeIndex === 1}>
+                </Accordion.Content> */}
 
                 <Accordion.Title active={activeIndex === 2} index={2} onClick={handleClick}>
-                   LISTS
+                    LISTS
                     <Icon name='angle down' />
 
-        </Accordion.Title>
-                <Accordion.Content active={activeIndex === 2}>
-                    <p>List 1</p>
-                    <p>List 2</p>
+                </Accordion.Title>
+                <Accordion.Content className="lists" active={activeIndex === 2}>
+                    <div className="listDiv">
+                        <div className="NavIcon">i</div>
+                        <p className="listTitle">List 1</p>
+                    </div>
+
                 </Accordion.Content>
                 <Accordion.Title active={activeIndex === 0} index={0} onClick={handleClick}>
                     CALENDAR
                 </Accordion.Title>
-                <Accordion.Content active={activeIndex === 0}>
-                    <p>Calendar</p>
-                </Accordion.Content>
+                {/* <Accordion.Content active={activeIndex === 0}>
+                </Accordion.Content> */}
+            </div>
             </Accordion>
-        )
+        </div>
+    )
 }
