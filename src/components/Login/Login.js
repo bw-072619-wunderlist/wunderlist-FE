@@ -46,8 +46,7 @@ const Login = (props) => {
           onSubmit={handleSubmit}
           loading={loading}
           >
-        <h4>Welcome Back!<br />
-        Log in here...</h4>
+        <h4>Welcome to TASK!</h4>
         <Form.Input
           fluid
           placeholder="Email"
@@ -71,11 +70,11 @@ const Login = (props) => {
           disabled={loading ? true : false}
           type="submit"
         >
-        Sign in
+        Register
       </Button>
     </Form>
     <div className='login-redirect'>
-        <Link className='login-link'>New User? Register Here</Link>
+        <Link className='login-link' to='/register'>New User? Register Here</Link>
       </div>
     </div>
     </div>

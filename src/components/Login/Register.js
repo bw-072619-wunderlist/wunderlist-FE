@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'
 import * as Yup from 'yup';
 import axios from 'axios';
 import { Button, Form, Input } from 'semantic-ui-react';
@@ -82,6 +83,10 @@ const Register = (props) => {
         Register
       </Button>
     </Form>
+    <div className='login-redirect'>
+        <h4>By registering, you automatically accept the Terms and Policies of Task app.</h4>
+        <Link className='login-link' to='/login'>Have an account? Sign In</Link>
+      </div>
     </div>
     </div>
     
