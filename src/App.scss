@@ -1,15 +1,35 @@
+@import './styles/variables.scss';
+
 .app-container {
   text-align: center;
 
-  .app-header {
-    background-color: #282c34;
-    min-height: 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-
+  .checkbox {
+    border: 2px solid $primary-light;
+    border-radius: 40%;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+    text-align: center;
   }
+
+  .unchecked {
+    background-color: white;
+  }
+
+  .checked {
+    background-color: $primary-light;
+  }
+
+  .unchecked:after {
+    content: '';
+  }
+
+  .checked:after {
+    content: '\2713 ';
+  }
+
+  li {
+    display: flex;
+  }
+
 }
