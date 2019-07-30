@@ -20,6 +20,7 @@
     width: 2.5rem;
     height: 2.5rem;
     font-size: 1rem;
+    text-align: center;
   }
 
   .unchecked {
@@ -36,6 +37,10 @@
 
   .checked:after {
     content: '\2713 ';
+  }
+
+  li {
+    display: flex;
   }
 
 }

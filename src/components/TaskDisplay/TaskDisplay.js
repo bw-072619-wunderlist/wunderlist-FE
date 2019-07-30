@@ -39,9 +39,9 @@ export default () => {
     return (
         <div>
             <h1>hello world</h1>
-            {subtasks && subtasks.map(task => (
+            <ul>{subtasks && subtasks.map(task => (
                 <SubtaskItem completed={task.completed} title={task.title} />
-            ))}
+            ))}</ul>
         </div>
     )
 }
