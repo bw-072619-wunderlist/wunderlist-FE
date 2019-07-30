@@ -4,14 +4,16 @@ export default ({ completed, title }) => {
 
     return (
         <li>
-            <button
-                className={
-                    completed ? 'checkbox checked' : 'checkbox unchecked'
-                    }
-            ></button>
+            <div className={
+                completed ? 'checkbox checked' : 'checkbox unchecked'
+            }><i class="fas fa-check fa-sm"></i></div>
             <p>{title}</p>
-            <img src='../../assets/calendar-regular.svg' alt='calIcon' />
-            <button style={{backgroundImage: '../../assets/calendar-regular.svg'}}></button>
+            <div className='cal-icon'>
+                <i class="far fa-calendar fa-lg"></i>
+            </div>
+            <div className='del-icon'>
+                <i class="fas fa-times fa-lg"></i>
+            </div>
         </li>
     )
 }

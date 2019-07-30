@@ -14,35 +14,56 @@
 
   .unchecked {
     background-color: white;
+
+    * {
+      visibility: hidden;
+    }
   }
 
   .checked {
     background-color: $primary-light;
   }
 
-  .unchecked:after {
-    content: '';
-  }
+  // .unchecked:after {
+  //   content: '';
+  // }
 
-  .checked:after {
-    content: '\2713 ';
-  }
+  // .checked:after {
+  //   content: '\2713 ';
+  // }
 
   ul {
-    max-width: 800px;
+    max-width: 500px;
     margin: auto;
+    font-size: 16px;
+    font-family: 'Lato';
+    color: $accent-dark;
 
     li {
       display: flex;
       height: 24px;
+      margin: 19px 0;
+
+      * {
+        margin: 0 16px 0 0;
+      }
   
+      :last-child {
+        margin: 0;
+      }
+
       p {
         flex: 1;
         text-align: left;
-        margin: 0 16px;
       }
-  }
 
-  }
+      .cal-icon {
+        color: $accent-light;
+      }
 
+      .del-icon {
+        color: $off-black;
+      }
+    }
+  }
 }
