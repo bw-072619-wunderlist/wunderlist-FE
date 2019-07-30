@@ -3,14 +3,6 @@ import { useState } from 'react';
 export default (initVal) => {
     const [subtasks, setSubtasks] = useState(initVal);
 
-    function updateItem(list, newItem, idField) {
-        const target = list.findIndex(item => {
-            return item[id] === newItem[id];
-        });
-        const updatedItem = {...subtasks[target], ...abbrevSubtask};
-        const oldOmitted = 
-    }
-
     function updateSubtask(newVersion) {
         const target = subtasks.findIndex(item => {
             return item.id === newItemnewVersion.id;

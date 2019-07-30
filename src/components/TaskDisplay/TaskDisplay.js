@@ -6,7 +6,6 @@ export default () => {
 
     function sortedSubtasks(unsorted) {
         function compareSubtasks(a, b) {
-            // console.log(a.completed, b.completed, +a.completed > +b.completed)
             if (+a.completed > +b.completed) {
                 console.log('ueoahtn')
                 return 1;
@@ -18,8 +17,6 @@ export default () => {
                 return 0;
             }
         }
-
-        // console.log([...unsorted].sort(compareSubtasks).map(t => t.completed))
 
         return [...unsorted].sort(compareSubtasks);
     }
