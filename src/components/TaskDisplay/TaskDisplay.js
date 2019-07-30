@@ -9,13 +9,10 @@ export default () => {
     function sortedSubtasks(unsorted) {
         function compareSubtasks(a, b) {
             if (+a.completed > +b.completed) {
-                console.log('ueoahtn')
                 return 1;
             } else if (+a.completed < +b.completed) {
-                console.log('two')
                 return -1;
             } else {
-                console.log('tri')
                 return 0;
             }
         }
@@ -30,7 +27,6 @@ export default () => {
             .get('https://my.api.mockaroo.com/todos.json', { headers })
             .then(res => {
                 const sorted = sortedSubtasks(res.data);
-                console.log(res.data.map((thing, index) => thing.title === sorted[index].title))
                 setSubtasks(sortedSubtasks(res.data));
             })
             .catch(console.log);

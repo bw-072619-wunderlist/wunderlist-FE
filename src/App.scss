@@ -5,9 +5,9 @@
 
   .checkbox {
     border: 2px solid $primary-light;
-    border-radius: 40%;
-    width: 2.5rem;
-    height: 2.5rem;
+    border-radius: 8.5px;
+    width: 24px;
+    height: 24px;
     font-size: 1rem;
     text-align: center;
   }
@@ -28,8 +28,21 @@
     content: '\2713 ';
   }
 
-  li {
-    display: flex;
+  ul {
+    max-width: 800px;
+    margin: auto;
+
+    li {
+      display: flex;
+      height: 24px;
+  
+      p {
+        flex: 1;
+        text-align: left;
+        margin: 0 16px;
+      }
+  }
+
   }
 
 }

@@ -10,8 +10,8 @@ export default ({ completed, title }) => {
                     }
             ></button>
             <p>{title}</p>
-            <img src='' alt='calIcon' />
-            <button>X</button>
+            <img src='../../assets/calendar-regular.svg' alt='calIcon' />
+            <button style={{backgroundImage: '../../assets/calendar-regular.svg'}}></button>
         </li>
     )
 }
