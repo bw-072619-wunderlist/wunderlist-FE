@@ -5,31 +5,65 @@
 
   .checkbox {
     border: 2px solid $primary-light;
-    border-radius: 40%;
-    width: 2.5rem;
-    height: 2.5rem;
+    border-radius: 8.5px;
+    width: 24px;
+    height: 24px;
     font-size: 1rem;
     text-align: center;
   }
 
   .unchecked {
     background-color: white;
+
+    * {
+      visibility: hidden;
+    }
   }
 
   .checked {
     background-color: $primary-light;
   }
 
-  .unchecked:after {
-    content: '';
-  }
+  // .unchecked:after {
+  //   content: '';
+  // }
 
-  .checked:after {
-    content: '\2713 ';
-  }
+  // .checked:after {
+  //   content: '\2713 ';
+  // }
 
-  li {
-    display: flex;
-  }
+  ul {
+    max-width: 500px;
+    margin: auto;
+    font-size: 16px;
+    font-family: 'Lato';
+    color: $accent-dark;
 
+    li {
+      display: flex;
+      height: 24px;
+      margin: 19px 0;
+
+      * {
+        margin: 0 16px 0 0;
+      }
+  
+      :last-child {
+        margin: 0;
+      }
+
+      p {
+        flex: 1;
+        text-align: left;
+      }
+
+      .cal-icon {
+        color: $accent-light;
+      }
+
+      .del-icon {
+        color: $off-black;
+      }
+    }
+  }
 }
