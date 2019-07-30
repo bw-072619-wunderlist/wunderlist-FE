@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Link, Redirect } from 'react-router-dom';
-import { editProfile } from './components/Profile/editProfile';
+import EditProfile from './components/Profile/editProfile';
+import Profile from './components/Profile/profileCard';
 
 import './App.scss';
 import Home from './components/Home/Home'
@@ -14,7 +15,8 @@ function App() {
       </header>
       <Route exact path="/" component={Home} />
       <Route exact path="/login" component={Login} />
-      <Route exact path="/edit" component={editProfile}/>
+      <Route exact path="/profile" component={Profile}/>
+      <Route exact path="/profile/edit" component={EditProfile}/>
     </div>
   );
 }

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const editProfile = (props) => {
+const EditProfile = (props) => {
     console.log(props);
-    const [person, setPerson] = useState({ id: 1, avatar: 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/78/78d8944a8c9867974e9d4b5be308dc1634e89a3d_full.jpg', username: 'Kayla_Rae', email: 'kayla.rae@example.com', notification: true, password: 'abc' });
+    const mockPerson = { id: 1, avatar: 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/78/78d8944a8c9867974e9d4b5be308dc1634e89a3d_full.jpg', username: 'Kayla_Rae', email: 'kayla.rae@example.com', notification: true, password: 'abc' };
+    const [person, setPerson] = useState(mockPerson);
     const editPerson = event => {
         setPerson({ ...person, [event.target.name]: event.target.value });
     };
@@ -16,7 +17,7 @@ const editProfile = (props) => {
     return (
         <form onSubmit={onSubmit} style={{ display: "flex", flexDirection: "column", maxWidth: "500px", margin: "0 auto" }}>
             <h2>Edit Profile</h2>
-            <img>{person.avatar}</img>
+            <img src={person.avatar} alt={person.username} />
             <Link to='#'>Edit Picture</Link>
             <h3>Username</h3>
             <input type='text' placeholder={person.username} value={person.username} name='username' onChange={editPerson} />
@@ -34,7 +35,7 @@ const editProfile = (props) => {
 };
 
 
-export default editProfile;
+export default EditProfile;
 
 
 // useEffect(() => {
