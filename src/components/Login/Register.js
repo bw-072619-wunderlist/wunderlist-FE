@@ -1,70 +1,80 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as Yup from 'yup';
 import axios from 'axios';
-import { Formik } from 'formik';
 import { Button, Form, Input } from 'semantic-ui-react';
 
 import './Login.scss';
 
 const Register = (props) => {
-  return ( 
-      <Formik 
-      initialValues={{
-          email: '',
-          password: '',
-      }}
-      validationSchema={Yup.object().shape({
-        email: Yup.string()
-          .required()
-          .email(),
-        password: Yup.string()
-          .required()
-          .min(6)
-      })}
-      onSubmit={(values, actions) => {
-          console.log(values);
-          actions.setSubmitting(true);
-            axios
-              .post('/api/login', values)
-              .then((response) => {
-                props.history.push('/');
-              })
-              .catch((e) => {
-                console.log(e.response.data);
-              });
-          }
-      }
-      render={props => 
-          (
-              <Form style={{display:'flex', flexDirection:'column', alignItems:'center'}} onSubmit={props.handleSubmit}>
-              <Form.Field
-              control={Input}
-              label='email'
-              name='email'
-              id='email'
-              type='text'
-              onChange={props.handleChange}
-              value={props.values.email}
-              width='4'
-              />
+  const [register, setRegister] = useState({
+    email: '',
+    username: '',
+    password: '',
+    password2: ''
+  })
 
-              <Form.Field
-              control={Input}
-              label='password'
-              name='password'
-              id='password'
-              type='text'
-              onChange={props.handleChange}
-              value={props.values.password}
-              width='4'
-              />
+  const handleSubmit = event => {
+    event.preventDefault();
+    console.log(register)
+    axios
+      .post('api/register', register)
+      .then(response => {
+        localStorage.setItem('token', response.data)
+      })
+      .then(props.history.push('/'))
+      .catch(response => {
+        console.log(response.error)
+      })
+  }
 
-              <Button type='submit'>Submit</Button>
-          </Form>
-          )
-      }
+  const handleChange = event => {
+    setRegister({ [event.target.name]: event.target.value });
+  };
+
+  return (
+    <div className='login-container'>
+      <div className='login-header'><h2>TASK</h2></div>
+      <div className='form-container'>
+<Form
+      size="large"
+      onSubmit={handleSubmit}
+      // loading={this.props.isFetching}
+    >
+      <h4>Welcome Back!<br />
+      Log in here...</h4>
+      <Form.Input
+        fluid
+        placeholder="Email"
+        value={register.email}
+        name="username"
+        onChange={handleChange}
+        autoComplete='off'
       />
-   );
+      <Form.Input
+        fluid
+        placeholder="Password"
+        value={register.password}
+        type="password"
+        name="password"
+        onChange={handleChange}
+        autoComplete='off'
+      />
+
+      <Button
+        fluid
+        size="large"
+        primary
+        // loading={isFetching ? true : false}
+        // disabled={isFetching ? true : false}
+        type="submit"
+      >
+        Register
+      </Button>
+    </Form>
+    </div>
+    </div>
+    
+  );
 }
 
-export default Register;
+export default Register
