@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Link, Redirect } from 'react-router-dom';
-import EditProfile from './components/Profile/editProfile';
+import EditProfile from './components/Profile/EditProfile';
 import Profile from './components/Profile/profileCard';
 
 import './App.scss';
