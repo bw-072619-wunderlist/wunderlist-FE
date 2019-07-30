@@ -19,10 +19,11 @@ const Login = (props) => {
     console.log(loading)
     console.log(login)
     axios
-      .post('api/login', login)
+      .post('https://wunderlist-be.herokuapp.com/api/v2/auths/login', login)
       .then(response => {
+        console.log(response)
         setLoading(false)
-        localStorage.setItem('token', response.data)
+        localStorage.setItem('token', response.data.token)
       })
       .then(props.history.push('/'))
       .catch(response => {
@@ -31,53 +32,53 @@ const Login = (props) => {
   }
 
   const handleChange = event => {
-    setLogin({ [event.target.name]: event.target.value });
+    setLogin({
+      ...login,
+      [event.target.name]: event.target.value });
   };
 
   return (
     <div className='login-container'>
       <div className='login-header'><h2>TASK</h2></div>
       <div className='form-container'>
-<Form
-      size="large"
-      onSubmit={handleSubmit}
-      loading={loading}
-    >
-      <h4>Welcome Back!<br />
-      Log in here...</h4>
-      <Form.Input
-        fluid
-        placeholder="Email"
-        value={login.email}
-        name="username"
-        onChange={handleChange}
-        autoComplete='off'
-      />
-      <Form.Input
-        fluid
-        placeholder="Password"
-        value={login.password}
-        type="password"
-        name="password"
-        onChange={handleChange}
-        autoComplete='off'
-      />
-
-      <Button
-        size="large"
-        loading={loading ? true : false}
-        disabled={loading ? true : false}
-        type="submit"
-      >
+        <Form
+          size="large"
+          onSubmit={handleSubmit}
+          loading={loading}
+          >
+        <h4>Welcome Back!<br />
+        Log in here...</h4>
+        <Form.Input
+          fluid
+          placeholder="Email"
+          value={login.email}
+          name="email"
+          onChange={handleChange}
+          autoComplete='off'
+        />
+        <Form.Input
+          fluid
+          placeholder="Password"
+          value={login.password}
+          type="password"
+          name="password"
+          onChange={handleChange}
+          autoComplete='off'
+        />
+        <Button
+          size="large"
+          loading={loading ? true : false}
+          disabled={loading ? true : false}
+          type="submit"
+        >
         Sign in
       </Button>
-      <div className='login-redirect'>
+    </Form>
+    <div className='login-redirect'>
         <Link className='login-link'>New User? Register Here</Link>
       </div>
-    </Form>
     </div>
     </div>
-    
   );
 }
 

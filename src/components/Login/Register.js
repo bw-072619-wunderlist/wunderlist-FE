@@ -9,7 +9,9 @@ const Register = (props) => {
   const [register, setRegister] = useState({
     email: '',
     username: '',
-    password: '',
+    password: '',})
+
+  const [passwordVerif, setPassword] = useState({
     password2: ''
   })
 
@@ -17,9 +19,9 @@ const Register = (props) => {
     event.preventDefault();
     console.log(register)
     axios
-      .post('api/register', register)
+      .post('https://wunderlist-be.herokuapp.com/api/v2/auths/register', register)
       .then(response => {
-        localStorage.setItem('token', response.data)
+        localStorage.setItem('token', response.data.token)
       })
       .then(props.history.push('/'))
       .catch(response => {
@@ -28,7 +30,8 @@ const Register = (props) => {
   }
 
   const handleChange = event => {
-    setRegister({ [event.target.name]: event.target.value });
+    setRegister({ ...register,
+      [event.target.name]: event.target.value });
   };
 
   return (
@@ -46,6 +49,14 @@ const Register = (props) => {
         fluid
         placeholder="Email"
         value={register.email}
+        name="email"
+        onChange={handleChange}
+        autoComplete='off'
+      />
+      <Form.Input
+        fluid
+        placeholder="Username"
+        value={register.username}
         name="username"
         onChange={handleChange}
         autoComplete='off'
