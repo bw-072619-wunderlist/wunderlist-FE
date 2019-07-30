@@ -47,6 +47,7 @@ const EditProfile = (props) => {
                 <Form.Field>
                     <label>Email</label>
                     <input placeholder={person.email} value={person.email} name='email' onChange={editPerson} />
+                    {/* <Button onClick={onSubmit}>Change Email</Button> */}
                 </Form.Field>
                 <Form.Field>
                     <label>Get email notifications</label>
@@ -57,6 +58,7 @@ const EditProfile = (props) => {
                 </Form.Field>
                 <Form.Field>
                     <label>Password</label>
+                    {/* <Button onClick={onSubmit}>Change Password</Button> */}
                     <input placeholder={person.password} value={person.password} name='password' onChange={editPerson} />
                 </Form.Field>
             </Form>
@@ -65,23 +67,6 @@ const EditProfile = (props) => {
             </div>
         </Modal>
 
-
-        /* // <form onSubmit={onSubmit} style={{ display: "flex", flexDirection: "column", maxWidth: "500px", margin: "0 auto" }}>
-        //     <Modal.Header>Edit Profile</Modal.Header>
-        //     <img src={person.avatar} alt={person.username} />
-        //     <Link to='#'>Edit Picture</Link>
-        //     <h3>Username</h3>
-        //     <input type='text' placeholder={person.username} value={person.username} name='username' onChange={editPerson} />
-        //     <h3>Username</h3>
-        //     <input type='text' placeholder={person.email} value={person.email} name='email' onChange={editPerson} />
-        //     <h3>Username</h3>
-        //     <h3>On</h3>
-        //     <div>toggle</div>
-        //     <h3>Off</h3>
-        //     <h3>Password</h3>
-        //     <input type='text' placeholder={person.password} value={person.password} name='email' onChange={editPerson} />
-        //     <button class="ui button">Done</button>
-        // </form> */
     );
 };
 

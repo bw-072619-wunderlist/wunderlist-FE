@@ -9,7 +9,7 @@ import Login from './components/Login/Login'
 import Register from './components/Login/Register'
 import editProfile from './components/Profile/editProfile';
 // import Profile from './components/Profile/profileCard';
-import AccordionExampleStandard from './components/Profile/SideNav';
+import AccordionExampleStandard from './components/Navigation/SideNav';
 import TaskDisplay from './components/TaskDisplay/TaskDisplay'
 
 function App() {
