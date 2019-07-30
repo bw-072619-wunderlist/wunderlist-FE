@@ -4,8 +4,14 @@ export default ({ completed, title }) => {
 
     return (
         <li>
-            <h1>hello world</h1>
-            <p>{title.concat(completed ? " COMPLETED" : " PENDING")}</p>
+            <button
+                className={
+                    completed ? 'checkbox checked' : 'checkbox unchecked'
+                    }
+            >checkbox</button>
+            <p>{title}</p>
+            <img src='' alt='calIcon' />
+            <button>X</button>
         </li>
     )
 }
