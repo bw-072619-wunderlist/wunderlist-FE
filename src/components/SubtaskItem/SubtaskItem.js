@@ -8,7 +8,7 @@ export default ({ completed, title }) => {
                 className={
                     completed ? 'checkbox checked' : 'checkbox unchecked'
                     }
-            >checkbox</button>
+            ></button>
             <p>{title}</p>
             <img src='' alt='calIcon' />
             <button>X</button>

@@ -15,8 +15,27 @@
   }
 
   .checkbox {
-    border: 2px solid $primary-color;
-    border-radius: 30%;
+    border: 2px solid $primary-light;
+    border-radius: 40%;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+  }
+
+  .unchecked {
+    background-color: white;
+  }
+
+  .checked {
+    background-color: $primary-light;
+  }
+
+  .unchecked:after {
+    content: '';
+  }
+
+  .checked:after {
+    content: '\2713 ';
   }
 
 }
