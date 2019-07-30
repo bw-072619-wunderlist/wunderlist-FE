@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import SubtaskItem from '../SubtaskItem/SubtaskItem';
+
 export default () => {
     const [subtasks, setSubtasks] = useState([]);
 
@@ -37,7 +39,9 @@ export default () => {
     return (
         <div>
             <h1>hello world</h1>
-            {subtasks && subtasks.map(task => (<li>{task.title.concat(task.completed ? " COMPLETED" : " PENDING")}</li>))}
+            {subtasks && subtasks.map(task => (
+                <SubtaskItem completed={task.completed} title={task.title} />
+            ))}
         </div>
     )
 }

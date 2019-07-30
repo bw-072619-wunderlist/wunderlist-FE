@@ -1,10 +1,11 @@
 import React from 'react';
 
-export default () => {
+export default ({ completed, title }) => {
 
     return (
-        <div>
+        <li>
             <h1>hello world</h1>
-        </div>
+            <p>{title.concat(completed ? " COMPLETED" : " PENDING")}</p>
+        </li>
     )
 }
