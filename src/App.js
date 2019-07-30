@@ -1,5 +1,7 @@
 import React from 'react';
-import { Route, Link, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+
+import PrivateRoute from './utils/PrivateRoute'
 
 import './App.scss';
 import Home from './components/Home/Home'
@@ -13,13 +15,13 @@ import TaskDisplay from './components/TaskDisplay/TaskDisplay'
 function App() {
   return (
     <div className="app-container">
-      <Route exact path="/" component={Home} />
+      <PrivateRoute exact path="/" component={Home} />
       <Route exact path='/login' render={(props) => <Login {...props} />} />
       <Route exact path='/register' render={(props) => <Register {...props} />} />
       {/* <Route exact path="/profile" component={Profile} /> */}
-      <Route exact path="/profile" component={AccordionExampleStandard} />
-      <Route exact path="/profile/edit" component={editProfile} />
-      <Route path='/task/:id' component={TaskDisplay} />
+      <PrivateRoute exact path="/profile" component={AccordionExampleStandard} />
+      <PrivateRoute exact path="/profile/edit" component={editProfile} />
+      <PrivateRoute exact path='/task/:id' component={TaskDisplay} />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import axios from 'axios';
 import { Button, Form, Input } from 'semantic-ui-react';
 
@@ -12,6 +12,8 @@ const Login = (props) => {
   })
 
   const [loading, setLoading] = useState(false)
+
+  const token = localStorage.getItem('token')
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -36,6 +38,10 @@ const Login = (props) => {
       ...login,
       [event.target.name]: event.target.value });
   };
+
+  if (token) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <div className='login-container'>
@@ -70,7 +76,7 @@ const Login = (props) => {
           disabled={loading ? true : false}
           type="submit"
         >
-        Register
+        Sign In
       </Button>
     </Form>
     <div className='login-redirect'>
