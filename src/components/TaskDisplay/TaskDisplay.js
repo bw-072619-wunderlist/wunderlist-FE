@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import AxiosWithAuth from '../../utils/AxiosWithAuth';
 
 import SubtaskItem from '../SubtaskItem/SubtaskItem';
 
@@ -24,24 +24,22 @@ export default () => {
     }
 
     useEffect(() => {
-        const key = '9ed169d0'
-        const headers = { "X-API-Key": key }
-        axios
-            .get('https://my.api.mockaroo.com/todos.json', { headers })
+        AxiosWithAuth()
+            .get(`https://wunderlist-be.herokuapp.com/api/v2/todos/1`)
             .then(res => {
-                const sorted = sortedSubtasks(res.data);
-                console.log(res.data.map((thing, index) => thing.title === sorted[index].title))
-                setSubtasks(sortedSubtasks(res.data));
+              console.log(res.data)
             })
-            .catch(console.log);
+            .catch(error => {
+              console.log(error)
+            });
     }, []);
 
     return (
         <div>
             <h1>hello world</h1>
-            <ul>{subtasks && subtasks.map(task => (
+            {/* <ul>{subtasks && subtasks.map(task => (
                 <SubtaskItem completed={task.completed} title={task.title} />
-            ))}</ul>
+            ))}</ul> */}
         </div>
     )
 }
