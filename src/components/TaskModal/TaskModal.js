@@ -15,8 +15,17 @@ const TaskModal = (props) => {
     repeat: 'no-repeat',
     scheduled_at: null,
   })
+  
+  // if (props.task) {
+  //   setTask({
+  //     title: task.title,
+  //     description: task.description,
+  //     repeat: task.repeat,
+  //     scheduled_at: task.scheduled_at
+  //   })
+  // }
 
-  console.log(props)
+  console.log(props.task)
 
   const changeHandler = (event) => {
     setTask({ 
@@ -34,7 +43,7 @@ const TaskModal = (props) => {
     setTask({ ...taskState, repeat: repeatValue})
   }
 
-  const handleSubmit = event => {
+  const addNewTask = event => {
     event.preventDefault();
     console.log(taskState)
     // setLoading(true)
@@ -48,6 +57,11 @@ const TaskModal = (props) => {
       .catch(response => {
         console.log(response.error)
       })
+  }
+
+  const editTask = event => {
+    event.preventDefault()
+
   }
 
   const repeatValues = [
@@ -66,7 +80,6 @@ const TaskModal = (props) => {
     text: value,
     value: repeatValues.value[index]
   }))
-  
 
   return (
     <div>
@@ -122,7 +135,7 @@ const TaskModal = (props) => {
           icon='checkmark' 
           labelPosition='right' 
           content='Add New Task' 
-          onClick={handleSubmit} />
+          onClick={addNewTask} />
       </div>
     </Modal.Content>
     </div> 

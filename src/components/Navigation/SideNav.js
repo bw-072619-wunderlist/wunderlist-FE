@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Accordion, Icon, Image, Checkbox } from 'semantic-ui-react';
+import { Accordion, Icon, Image, Checkbox, Modal } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import './sideNav.scss';
 import NavBar from './UpperNav';
+import EditProfile from '../Profile/editProfile'
 
 
 export default function AccordionExampleStandard(props) {
@@ -12,6 +13,13 @@ export default function AccordionExampleStandard(props) {
   };
   const [activeIndex, setActiveIndex] = useState(0);
   const [person, setPerson] = useState(mockPerson);
+
+  const [openModal, setOpen] =useState( false)
+
+  const show = () => setOpen( true );
+  const close = () => setOpen(false)
+  
+
 
   const handleClick = (e, titleProps) => {
       const { index } = titleProps;
@@ -35,7 +43,14 @@ export default function AccordionExampleStandard(props) {
                   <Icon name='angle down' />
               </Accordion.Title>
               <Accordion.Content active={activeIndex === 0} className="profileCard">
-                  <Link to='/profile/edit'>Edit Profile</Link>
+              <div onClick={show}>Edit Profile</div>
+                  <Modal open={openModal} onClose={close}>
+                      <EditProfile />
+                      <Modal.Actions>
+                        <button negative onClick={close}>Cancel</button>
+                      </Modal.Actions>
+                    </Modal>
+                 
                   <div>Get Email notifications</div>
                   <div className="toggleDiv">
                       <label className="toggleLabel">Off</label>

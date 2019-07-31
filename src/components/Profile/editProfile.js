@@ -36,7 +36,7 @@ const EditProfile = (props) => {
   };
 
   return (
-      <Modal trigger={<Button>Show Modal</Button>}>
+    <>
           <Modal.Header>Edit Profile</Modal.Header>
           <Modal.Content image>
               <Image wrapped size='small' src={person.avatar} circular />
@@ -70,8 +70,7 @@ const EditProfile = (props) => {
           <div className="buttonDiv">
               <Button onClick={onSubmit}>Done</Button>
           </div>
-      </Modal>
-
+    </>
   );
 };
 

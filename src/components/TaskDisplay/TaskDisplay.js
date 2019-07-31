@@ -51,7 +51,7 @@ export default () => {
             ))}</ul>
 
         <Modal size={'small'} open={openModal} onClose={close}>
-        <TaskModal taskid={task} />
+        <TaskModal task={task} />
         <Modal.Actions>
           <button negative onClick={close}>Cancel</button>
         </Modal.Actions>
