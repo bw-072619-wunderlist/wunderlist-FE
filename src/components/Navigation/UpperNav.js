@@ -6,12 +6,17 @@ import './upperNav.scss';
 
 
 export default function NavBar(props) {
+    const [showSearch, setShowSearch] = useState(false);
+
+    const handleChange = () => {
+        setShowSearch(!showSearch);
+    }
 
     return (
         <div className="Nav">
-            <Link to="" className="Search">
-                <Input placeholder='Search...' />
-                <Icon className="searchIcon" name="search" size="large" />
+            <Link to="#" className="Search">
+                <Input focus={showSearch} placeholder='Search...' />
+                <Icon className="searchIcon" name="search" size="large" onClick={handleChange} />
             </Link>
             <div className="Navbar">
                 <Link to="#" className="current">HOME</Link>
