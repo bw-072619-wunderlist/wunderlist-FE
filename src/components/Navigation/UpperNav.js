@@ -4,7 +4,7 @@ import { Input, Icon, Modal, Button } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 
 import './upperNav.scss';
-import CreateTask from '../CreateTask/CreateTask'
+import TaskModal from '../TaskModal/TaskModal'
 
 
 export default function NavBar(props) {
@@ -31,8 +31,8 @@ export default function NavBar(props) {
                     <Link to="#" className="addButton"> */}
                       <button className='addButton' onClick={show}>+</button>
                     {/* </Link> */}
-                    <Modal size={'medium'} open={openModal} onClose={close}>
-                      <CreateTask />
+                    <Modal size={'small'} open={openModal} onClose={close}>
+                      <TaskModal />
                       <Modal.Actions>
                         <button negative onClick={close}>Cancel</button>
                       </Modal.Actions>
