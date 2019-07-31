@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Input, Icon } from 'semantic-ui-react';
+import { Input, Icon, Modal, Button } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
+
 import './upperNav.scss';
+import CreateTask from '../CreateTask/CreateTask'
 
 
 export default function NavBar(props) {
     const [showSearch, setShowSearch] = useState(false);
+    const [openModal, setOpen] =useState( false)
 
     const handleChange = () => {
         setShowSearch(!showSearch);
     }
+
+    const show = () => setOpen( true );
+    const close = () => setOpen(false)
 
     return (
         <div className="Nav">
@@ -21,7 +27,16 @@ export default function NavBar(props) {
             <div className="Navbar">
                 <Link to="#" className="current">HOME</Link>
                 <div className="addNav">
-                    <Link to="#" className="addButton">+</Link>
+                    {/* SAVING DORA CODE
+                    <Link to="#" className="addButton"> */}
+                      <button className='addButton' onClick={show}>+</button>
+                    {/* </Link> */}
+                    <Modal size={'medium'} open={openModal} onClose={close}>
+                      <CreateTask />
+                      <Modal.Actions>
+                        <button negative onClick={close}>Cancel</button>
+                      </Modal.Actions>
+                    </Modal>
                     <div className="addTask">Add a TASK</div>
                 </div>
              </div>
