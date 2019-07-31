@@ -1,9 +1,11 @@
 import React from 'react';
 import { Modal, Form, Input, Button, TextArea } from 'semantic-ui-react'
+import DatePicker from 'react-datepicker'
 
 import AxiosWithAuth from '../../utils/AxiosWithAuth';
 
 import 'semantic-ui-css/semantic.min.css';
+import "react-datepicker/dist/react-datepicker.css";
 
 class CreateTask extends React.Component {
   constructor(props){
@@ -11,9 +13,8 @@ class CreateTask extends React.Component {
     this.state ={
       title: '',
       description: '',
-      // completed: false,
       // repeat: '',
-      // scheduled_at: null,
+      scheduled_at: null,
   }}
 
   changeHandler = (event) => {
@@ -21,6 +22,10 @@ class CreateTask extends React.Component {
       ...this.state,
       [event.target.name]: event.target.value 
   })}
+
+  dateHandler = date => {
+    this.setState({ scheduled_at: date})
+  }
 
   handleSubmit = event => {
     event.preventDefault();
@@ -64,9 +69,16 @@ class CreateTask extends React.Component {
               value={this.state.description} 
               onChange={this.changeHandler} />
 
-            {/* <DatePicker
-              selected={this.state.scheduled_at}
-              onChange={this.handleDate} /> */}
+            <DatePicker
+                selected={this.state.scheduled_at}
+                onChange={this.dateHandler}
+                name='scheduled_at'
+                showTimeSelect
+                timeFormat="HH:mm"
+                timeIntervals={15}
+                dateFormat="MMMM d, yyyy h:mm aa"
+                timeCaption="time"
+            />
 
               {/* SET SCHEDULE, will need cat here */}
             </Form>
@@ -110,34 +122,3 @@ const categoryOptions = _.map(categoryDefinitions, (category, index) => ({
 
 
 import _ from 'lodash'; */}
-
-
-
-            {/* <h4>Sub-Tasks</h4>
-            <Form.Field
-              label='Purchase Description'
-              name='purchaseDescription'
-              control={Input}
-              value={this.state.purchaseDescription}
-              onChange={this.changeHandler} />
-            <Form.Field>
-            <label>Price</label>
-            <Input type="text" placeholder="Amount">
-            <Label basic>$</Label>
-            <input
-            name="price"
-            onChange={this.changeHandler}
-            value={this.state.price}
-            />
-            <Label>.00</Label>
-            </Input>
-            </Form.Field>
-
-            <Form.Field 
-              label='Quantity'
-              name='qty'
-              control={Input}
-              value={this.state.qty}
-            onChange={this.changeHandler} /> */}
-
-            //// Info on adding sub-tasks that I'm saving for now
