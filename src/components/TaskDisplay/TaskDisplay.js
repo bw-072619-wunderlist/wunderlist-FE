@@ -26,6 +26,7 @@ export default () => {
             .get(`https://wunderlist-be.herokuapp.com/api/v2/todos/1`)
             .then(res => {
               setSubtasks(sortedSubtasks(res.data.tasks));
+              console.log(res.data)
             })
             .catch(error => {
               console.log(error)

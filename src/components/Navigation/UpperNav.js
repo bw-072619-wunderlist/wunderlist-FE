@@ -13,6 +13,8 @@ export default function NavBar(props) {
             <div className="Navbar">
                 <div className="current">HOME</div>
                 <div className="addButton"></div>
+
+            
                 <div className="addTask">Add a TASK</div>
              </div>
         </div>

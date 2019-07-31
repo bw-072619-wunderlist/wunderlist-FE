@@ -10,9 +10,12 @@ import './editProfile.scss';
 
 const EditProfile = (props) => {
   console.log(props);
+  const mockPerson = {
+    id: 1, avatar: 'https://react.semantic-ui.com/images/avatar/large/rachel.png', username: 'Kayla_Rae', email: 'kayla.rae@example.com', notification: false, password: 'abc'
+};
 
   const [person, setPerson] = useState([]);
-  
+
   console.log(person);
 
   const editPerson = event => {

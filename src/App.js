@@ -12,6 +12,7 @@ import editProfile from './components/Profile/editProfile';
 // import Profile from './components/Profile/profileCard';
 import AccordionExampleStandard from './components/Navigation/SideNav';
 import TaskDisplay from './components/TaskDisplay/TaskDisplay'
+import CreateTask from './components/CreateTask/CreateTask'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         {/* <Route exact path="/profile" component={Profile} /> */}
         <PrivateRoute exact path="/profile" component={AccordionExampleStandard} />
         <PrivateRoute exact path="/profile/edit" component={editProfile} />
+        <PrivateRoute exact path='/create' component={CreateTask} />
         <PrivateRoute exact path='/task/:id' component={TaskDisplay} />
       {/* </UserContext.Provider> */}
     </div>
