@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { Button, Header, Image, Modal, Form, Checkbox } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
-
-import AxiosWithAuth from '../../utils/AxiosWithAuth'
-
 import './editProfile.scss';
 
 
 const EditProfile = (props) => {
   console.log(props);
   const mockPerson = {
-    id: 1, avatar: 'https://react.semantic-ui.com/images/avatar/large/rachel.png', username: 'Kayla_Rae', email: 'kayla.rae@example.com', notification: false, password: 'abc'
+      id: 1, avatar: 'https://www.pngkey.com/png/detail/115-1150152_default-profile-picture-avatar-png-green.png', username: 'Kayla_Rae', email: 'kayla.rae@example.com', notification: false, password: 'abc'
 };
 
     const [person, setPerson] = useState(mockPerson);
+  
   
   console.log(person);
 
@@ -36,7 +34,11 @@ const EditProfile = (props) => {
   };
 
   return (
+<<<<<<< HEAD
     <>
+=======
+     <>
+>>>>>>> 2899011c263f39b923b883a157e61a4f457c3345
           <Modal.Header>Edit Profile</Modal.Header>
           <Modal.Content image>
               <Image wrapped size='small' src={person.avatar} circular />
@@ -70,7 +72,12 @@ const EditProfile = (props) => {
           <div className="buttonDiv">
               <Button onClick={onSubmit}>Done</Button>
           </div>
+<<<<<<< HEAD
     </>
+=======
+     </>
+
+>>>>>>> 2899011c263f39b923b883a157e61a4f457c3345
   );
 };
 

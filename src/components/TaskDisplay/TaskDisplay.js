@@ -7,7 +7,7 @@ import AxiosWithAuth from '../../utils/AxiosWithAuth';
 import TaskModal from '../TaskModal/TaskModal';
 import SubtaskItem from '../SubtaskItem/SubtaskItem';
 
-export default () => {
+export default function TaskDisplay() {
     const [subtasks, setSubtasks] = useState([]);
     const [task, setTask] = useState()
     const [openModal, setOpen] =useState( false)
