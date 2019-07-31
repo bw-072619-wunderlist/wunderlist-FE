@@ -34,11 +34,7 @@ const EditProfile = (props) => {
   };
 
   return (
-<<<<<<< HEAD
-    <>
-=======
      <>
->>>>>>> 2899011c263f39b923b883a157e61a4f457c3345
           <Modal.Header>Edit Profile</Modal.Header>
           <Modal.Content image>
               <Image wrapped size='small' src={person.avatar} circular />
@@ -72,12 +68,8 @@ const EditProfile = (props) => {
           <div className="buttonDiv">
               <Button onClick={onSubmit}>Done</Button>
           </div>
-<<<<<<< HEAD
-    </>
-=======
      </>
 
->>>>>>> 2899011c263f39b923b883a157e61a4f457c3345
   );
 };
 
