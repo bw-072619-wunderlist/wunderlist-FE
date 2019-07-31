@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Form, Input, Button, TextArea } from 'semantic-ui-react'
+import { Modal, Form, Input, Button, TextArea, Dropdown } from 'semantic-ui-react'
 import DatePicker from 'react-datepicker'
 
 import AxiosWithAuth from '../../utils/AxiosWithAuth';
@@ -13,7 +13,7 @@ class CreateTask extends React.Component {
     this.state ={
       title: '',
       description: '',
-      // repeat: '',
+      repeat: 'no-repeat',
       scheduled_at: null,
   }}
 
@@ -43,6 +43,17 @@ class CreateTask extends React.Component {
       })
   }
 
+  repeatOptions = [
+    {text: `Don't Repeat`,
+    value: 'no-repeat'},
+    {text: 'Daily',
+    value: 'daily',},
+    {text: 'Weekly',
+    value: 'weekly'},
+    {text: 'Monthly',
+    value: 'monthly'}
+  ]
+
   render() {
     return (
       <div>
@@ -70,15 +81,19 @@ class CreateTask extends React.Component {
               onChange={this.changeHandler} />
 
             <DatePicker
-                selected={this.state.scheduled_at}
-                onChange={this.dateHandler}
-                name='scheduled_at'
-                showTimeSelect
-                timeFormat="HH:mm"
-                timeIntervals={15}
-                dateFormat="MMMM d, yyyy h:mm aa"
-                timeCaption="time"
-            />
+              selected={this.state.scheduled_at}
+              onChange={this.dateHandler}
+              name='scheduled_at'
+              showTimeSelect
+              timeFormat="HH:mm"
+              timeIntervals={15}
+              dateFormat="MMMM d, yyyy h:mm aa"
+              timeCaption="time" />
+
+            {/* <Dropdown
+              placeholder='Repeat Task?'
+              selection
+              options={repeatOptions} /> */}
 
               {/* SET SCHEDULE, will need cat here */}
             </Form>
