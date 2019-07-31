@@ -4,7 +4,7 @@ import AxiosWithAuth from '../../utils/AxiosWithAuth';
 
 import SubtaskItem from '../SubtaskItem/SubtaskItem';
 
-export default () => {
+export default function TaskDisplay() {
     const [subtasks, setSubtasks] = useState([]);
 
     function sortedSubtasks(unsorted) {
