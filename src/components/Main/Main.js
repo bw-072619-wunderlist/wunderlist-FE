@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../Navigation/UpperNav';
 import AccordionExampleStandard from '../Navigation/SideNav';
 import Home from '../Home/Home';
-import { Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router'
 
 import PrivateRoute from '../../utils/PrivateRoute';
 // import { TaskContext } from './contexts/TaskContext'
@@ -18,7 +18,7 @@ import AxiosWithAuth from '../../utils/AxiosWithAuth';
 
 
 
-export default function MainPage(props) {
+const MainPage = (props) => {
   const [tasks, setTasks] = useState([])
   const [filteredTasks, setFilteredTasks] = useState([])
   const [searchTerm, setSearch] = useState('')
@@ -35,17 +35,19 @@ export default function MainPage(props) {
       .then(response => {
         setTasks(response.data)
       })
+      .catch(response => {
+        console.log('useEffect in Main.js to mount tasks error :', response)
+      })
   }, [])
 
   useEffect(() => {
     console.log('these are the Tasks:', tasks)
-    setFilteredTasks(tasks.filter(task => task.title.includes(searchTerm)))
+    if (searchTerm.length > 0 ){
+      setFilteredTasks(tasks.filter(task => task.title.includes(searchTerm)))
+      props.history.push('/search')
+    }
+    console.log('checking when this hits')
   },[searchTerm])
-
-  useEffect(() => {
-    console.log(filteredTasks)
-  },[filteredTasks])
-
 
     return (
         <div>
@@ -59,9 +61,11 @@ export default function MainPage(props) {
                 {/* <PrivateRoute exact path='/create' component={(props) => <CreateTask />} /> */}
                 <PrivateRoute path='/task/:id' component={(props) => <TaskDisplay match={props.match} />} />
                 <PrivateRoute path='/calendar' component={CalendarDisplay} />
-                <PrivateRoute path='/search' component={(props) => <Search push={props.history} filteredTasks={filteredTasks} />} />
+                <PrivateRoute path='/search' component={(props) => <Search filteredTasks={filteredTasks} />} />
             </div>
           {/* </TaskContext.Provider> */}
         </div>
     )
 };
+
+export default withRouter(MainPage)

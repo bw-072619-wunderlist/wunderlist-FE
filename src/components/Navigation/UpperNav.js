@@ -23,14 +23,7 @@ export default function NavBar(props) {
   const searchHandler = (event) => {
     setSearch(event.target.value)
   }
-
-  useEffect(()=> {
-    console.log('useEffect in Main', props.filteredTasks)
-  }, [props.filteredTasks])
-
-  console.log(props)
-  console.log(search)
-
+  
   const show = () => setOpen( true );
   const close = () => setOpen(false)
 
