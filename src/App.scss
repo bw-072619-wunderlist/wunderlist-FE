@@ -24,13 +24,24 @@
     background-color: $primary-light;
   }
 
-  // .unchecked:after {
-  //   content: '';
-  // }
+  .fluid-list {
+    max-width: 700px;
+    margin: 32px auto;
+    display: flex;
+    flex-direction: row;
 
-  // .checked:after {
-  //   content: '\2713 ';
-  // }
+    h1, h2, h3, h4, h5, h6, p {
+      flex: 1;
+    }
+
+    * {
+      margin: 0 16px 0 0;
+    }
+
+    > :last-child {
+      margin: 0;
+    }
+  }
 
   ul {
     max-width: 500px;
@@ -48,7 +59,7 @@
         margin: 0 16px 0 0;
       }
   
-      :last-child {
+      > :last-child {
         margin: 0;
       }
 

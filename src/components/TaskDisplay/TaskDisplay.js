@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { Modal } from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css';
 
 import AxiosWithAuth from '../../utils/AxiosWithAuth';
 
+import TaskModal from '../TaskModal/TaskModal';
 import SubtaskItem from '../SubtaskItem/SubtaskItem';
 
-export default () => {
+export default function TaskDisplay() {
     const [subtasks, setSubtasks] = useState([]);
+    const [task, setTask] = useState({})
+    const [openModal, setOpen] = useState(false)
+
+    const show = () => setOpen(true);
+    const close = () => setOpen(false)
 
     function sortedSubtasks(unsorted) {
         function compareSubtasks(a, b) {
@@ -23,21 +31,52 @@ export default () => {
 
     useEffect(() => {
         AxiosWithAuth()
-            .get(`https://wunderlist-be.herokuapp.com/api/v2/todos/1`)
+            .get(`https://wunderlist-be.herokuapp.com/api/v2/todos/2`)
             .then(res => {
-              setSubtasks(sortedSubtasks(res.data.tasks));
+                setSubtasks(sortedSubtasks(res.data.tasks));
+                console.log(res.data)
+                setTask(res.data)
             })
             .catch(error => {
-              console.log(error)
+                console.log(error)
             });
-    }, []); 
+    }, []);
+
+    // const addUser = () => {
+    //   const todoID = task.id
+    //   const userID = 
+    //   AxiosWithAuth()
+    //     .put(`https://wunderlist-be.herokuapp.com/api/v2/todos/${todoID}/users/${userID}`)
+    //     .then(response => {
+    //       console.log(response)
+    //     })
+    //     .catch(response => {
+    //       console.log(response)
+    //     })
+    // }
 
     return (
         <div>
-            <h1>hello world</h1>
+            <div className="fluid-list">
+                <div className={
+                    task.completed ? 'checkbox checked' : 'checkbox unchecked'
+                }>
+                    <i className="fas fa-check fa-sm"></i>
+                </div>
+                <h1>hello world</h1>
+                <button onClick={show}>Edit Task</button>
+            </div>
+
             <ul>{subtasks && subtasks.map(task => (
-                <SubtaskItem completed={task.completed} name={task.name} />
+                <SubtaskItem completed={task.completed} name={task.name} id={task.id} />
             ))}</ul>
+
+            <Modal size={'small'} open={openModal} onClose={close}>
+                <TaskModal task={task} />
+                <Modal.Actions>
+                    <button negative onClick={close}>Cancel</button>
+                </Modal.Actions>
+            </Modal>
         </div>
     )
 }
