@@ -37,6 +37,18 @@ export default function TaskDisplay() {
         }]));
     }
 
+    const deleteSubtask = id => {
+        console.log(id)
+        AxiosWithAuth()
+          .delete(`https://wunderlist-be.herokuapp.com/api/v2/tasks/${id}`)
+          .then(response => {
+            console.log(response)
+          })
+          .catch(response => {
+            console.log(response)
+          })
+      }
+
     useEffect(() => {
         AxiosWithAuth()
             .get(`https://wunderlist-be.herokuapp.com/api/v2/todos/2`)
@@ -64,8 +76,8 @@ export default function TaskDisplay() {
                 </div>
             </div>
 
-            <ul>{subtasks && subtasks.map(task => (
-                <SubtaskItem completed={task.completed} name={task.name} id={task.id} />
+            <ul>{subtasks && subtasks.map(subtask => (
+                <SubtaskItem {...subtask} delFunc={deleteSubtask} />
             ))}</ul>
 
             <div onClick={addSubtask}><i class='fas fa-plus fa-lg'></i></div>
@@ -75,9 +87,9 @@ export default function TaskDisplay() {
                     <h2>Add Collaborator:</h2>
                     <input type="text" id="name" value={"fix this"} onChange={() => console.log('fix this too')} />
                 </label>
-            </form> */}
+            </form>
 
-            <h2>!!current collaborator!!</h2>
+            <h2>!!current collaborator!!</h2> */}
 
             <Modal size={'small'} open={openModal} onClose={close}>
                 <TaskModal task={task} />

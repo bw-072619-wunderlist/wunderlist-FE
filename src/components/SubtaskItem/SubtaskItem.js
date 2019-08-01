@@ -2,24 +2,24 @@ import React, { useState, useEffect } from 'react';
 
 import AxiosWithAuth from '../../utils/AxiosWithAuth'
 
-export default ({ completed, name, id }) => {
+export default ({ completed, name, id, delFunc }) => {
   const [subtask, setSubtask] = useState({
     name: name,
     completed: completed,
   })
   const [userField, setUser] = useState('')
 
-  const deleteSubTask = () => {
-    console.log(id)
-    AxiosWithAuth()
-      .delete(`https://wunderlist-be.herokuapp.com/api/v2/tasks/${id}`)
-      .then(response => {
-        console.log(response)
-      })
-      .catch(response => {
-        console.log(response)
-      })
-  }
+  // const deleteSubTask = () => {
+  //   console.log(id)
+  //   AxiosWithAuth()
+  //     .delete(`https://wunderlist-be.herokuapp.com/api/v2/tasks/${id}`)
+  //     .then(response => {
+  //       console.log(response)
+  //     })
+  //     .catch(response => {
+  //       console.log(response)
+  //     })
+  // }
 
   const toggleSubTask = () => {
     setSubtask({
@@ -47,7 +47,7 @@ export default ({ completed, name, id }) => {
         subtask.completed ? 'checkbox checked' : 'checkbox unchecked'
       }><i className="fas fa-check fa-sm"></i></button>
       <p>{subtask.name}</p>
-      <button className='del-icon' onClick={deleteSubTask}>
+      <button className='del-icon' onClick={() => delFunc(id)}>
         <i className="fas fa-times fa-lg"></i>
       </button>
     </li>
