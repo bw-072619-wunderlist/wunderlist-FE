@@ -6,7 +6,7 @@ const Home = () => {
   
 const [EverythingState, setEverythingState] = useState([]);
 
-const sortedState = EverythingState.updated_at.sort();
+// const sortedState = EverythingState.updated_at.sort();
 
 useEffect(() => {
   AxiosWithAuth()
@@ -21,6 +21,16 @@ useEffect(() => {
         console.log(error)
       });
 }, []); 
+
+// if (this.props.mountComplete === false) {
+//   return (
+//       <Dimmer active inverted>
+//           <Loader>Loading</Loader>
+//       </Dimmer>
+//   )
+// } else {
+//   const todayTasks = todos.duedate.filter(task =>
+//       task.category.includes('Organization'));
 
   return(
     <div>
