@@ -3,16 +3,73 @@ import { Link, Redirect } from 'react-router-dom';
 import { Accordion, Icon, Image, Checkbox, Modal } from 'semantic-ui-react';
 import EditProfile from '../Profile/editProfile';
 
+import axios from 'axios';
+
 import 'semantic-ui-css/semantic.min.css';
 import './sideNav.scss';
 
 
 export default function AccordionExampleStandard(props) {
+
     const data = JSON.parse(localStorage.getItem('data')) || { id: 0, avatar: "", username: "", email: "", notify: true, password: "", token: "" };
     const [person, setPerson] = useState(data);
 
     useEffect(() => {
+        // const oldPerson = JSON.parse(localStorage.getItem('data'));
+        // const headers = {
+        //     'Content-Type': 'application/json',
+        //     'Authorization': localStorage.getItem('token')            
+        // }
+        // const keys = ['username', 'notify', 'avatar'];
+        // var newPerson = {};
+        // keys.forEach(key => newPerson[key] = person[key]);
+        // axios.put(`https://wunderlist-be.herokuapp.com/api/v2/users/`, newPerson, {'headers': headers})
+        // localStorage.setItem('data', JSON.stringify(person))
+        
+        const oldPerson = JSON.parse(localStorage.getItem('data'));
+
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('token')
+        }
+
+        const putKeys = ['username', 'notify', 'avatar'];
+
+        var putNewPerson = {};
+        putKeys.forEach(key => putNewPerson[key] = person[key]);
+
+        var isNewSameAsOld = putKeys.map(key => putNewPerson[key] === oldPerson[key]).reduce((current, acc) => current && acc)
+
+        if (!isNewSameAsOld) {
+            axios.put('https://wunderlist-be.herokuapp.com/api/v2/users/', putNewPerson, {'headers': headers})
+}
+
+
+        const authKeys = ['email', 'password'];
+
+        var authNewPerson = {};
+        authKeys.forEach(key => authNewPerson[key] = person[key]);
+
+        var isNewSameAsOld = authKeys.map(key => authNewPerson[key] === oldPerson[key]).reduce((current, acc) => current && acc)
+
+        if (!isNewSameAsOld) {
+            if (authNewPerson['email'] !== oldPerson['email']) {
+                authNewPerson['newEmail'] = authNewPerson['email'];
+                authNewPerson['email'] = oldPerson['email'];
+            }
+
+            if (authNewPerson['password'] !== oldPerson['password']) {
+                authNewPerson['newPassword'] = authNewPerson['password'];
+                authNewPerson['password'] = oldPerson['password'];
+            }
+            console.log(authNewPerson)
+            axios.put('https://wunderlist-be.herokuapp.com/api/v2/auths/reset', authNewPerson, {'headers': headers})
+}           
+
         localStorage.setItem('data', JSON.stringify(person))
+
+
+
     }, [person]);
 
     const [activeIndex, setActiveIndex] = useState(0);

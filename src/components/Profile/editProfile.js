@@ -5,7 +5,6 @@ import 'semantic-ui-css/semantic.min.css';
 import './editProfile.scss';
 
 import Login from '../Login/Login';
-import AxiosWithAuth from '../../utils/AxiosWithAuth';
 
 
 const EditProfile = (props) => {
@@ -78,6 +77,7 @@ const EditProfile = (props) => {
                   <label>Password</label>
                   {/* <Button onClick={onSubmit}>Change Password</Button> */}
                   <input placeholder={person.password} value={person.password} name='password' onChange={editPerson} />
+                  
               </Form.Field>
           </Form>
           <div className="buttonDiv">
@@ -90,18 +90,3 @@ const EditProfile = (props) => {
 
 
 export default EditProfile;
-
-
-/* // useEffect(() => {
-//     axios.get(`https://url/${userid}`)
-//         .then(res => setPerson({ ...res }[e.target.name] : e.target.value))
-
-//         .catch(error => console.log(error));
-
-// }, [person]);
-
-
-
-// function handleOnChange(event) {
-//     setPerson({ [e.target.name]: e.target.value })
-// } */

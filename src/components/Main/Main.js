@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Navbar from '../Navigation/UpperNav';
 import AccordionExampleStandard from '../Navigation/SideNav';
 import Home from '../Home/Home';
+import Testing from '../../testing/testing';
 
 import PrivateRoute from '../../utils/PrivateRoute';
 // import { TaskContext } from './contexts/TaskContext'
@@ -42,6 +43,7 @@ export default function MainPage(props) {
                 <PrivateRoute path='/task/:id' component={(props) => <TaskDisplay match={props.match} />} />
                 <PrivateRoute path='/calendar' component={CalendarDisplay} />
                 <PrivateRoute path='/search' component={(props) => <Search filteredTasks={filteredTasks} />} />
+                <PrivateRoute path='/testing' component={Testing} />
             </div>
           {/* </TaskContext.Provider> */}
         </div>

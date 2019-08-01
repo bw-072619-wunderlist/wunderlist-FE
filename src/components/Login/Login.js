@@ -9,7 +9,7 @@ import './Login.scss';
 
 const Login = (props) => {
   console.log(props);
-  
+
   // const { user } = useContext(UserContext)
 
   const [login, setLogin] = useState({
@@ -34,7 +34,7 @@ const Login = (props) => {
         localStorage.setItem('token', response.data.token)
         const data = response.data;
         console.log(data);
-        localStorage.setItem('token', response.data.token);
+        // localStorage.setItem('token', response.data.token);
         localStorage.setItem('data', JSON.stringify(response.data));
       })
       .then(props.history.push('/'))
