@@ -61,7 +61,7 @@ export default function AccordionExampleStandard(props) {
                     <label className="toggleLabel">On</label>
                 </div>
                 <div>{person.email}</div>
-                <Link to='/login' onClick={signOut}>Sign Out</Link>
+                <Link onClick={signOut}>Sign Out</Link>
             </Accordion.Content>
             <Accordion.Title active={activeIndex === 1} index={1} onClick={handleClick}>
                 HOME
