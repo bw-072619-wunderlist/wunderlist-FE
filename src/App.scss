@@ -4,9 +4,9 @@
   text-align: center;
 
   .checkbox {
+    @include icon-btn;
     border: 2px solid $primary-light;
     border-radius: 8.5px;
-    @include icon-btn;
     // //kept for backward compatibility (remove later):
     // font-size: 1rem;
     // text-align: center;
