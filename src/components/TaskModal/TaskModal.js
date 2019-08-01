@@ -7,6 +7,7 @@ import AxiosWithAuth from '../../utils/AxiosWithAuth';
 
 import 'semantic-ui-css/semantic.min.css';
 import "react-datepicker/dist/react-datepicker.css";
+import "./TaskModal.scss";
 
 const TaskModal = (props) => {
   const [taskState, setTask] = useState({
@@ -15,7 +16,7 @@ const TaskModal = (props) => {
     repeat: 'no-repeat',
     scheduled_at: null,
   })
-  
+
   useEffect(() => {
     if (props.task) {
       setTask({
@@ -25,24 +26,25 @@ const TaskModal = (props) => {
         scheduled_at: props.task.scheduled_at
       })
     }
-  },[])
+  }, [])
 
   // console.log(props.task)
 
   const changeHandler = (event) => {
-    setTask({ 
+    setTask({
       ...taskState,
-      [event.target.name]: event.target.value 
-  })}
+      [event.target.name]: event.target.value
+    })
+  }
 
   const dateHandler = date => {
-    setTask({ ...taskState, scheduled_at: date})
+    setTask({ ...taskState, scheduled_at: date })
     console.log(taskState)
   }
 
   const repeatHandler = repeatValue => {
     console.log(repeatValue)
-    setTask({ ...taskState, repeat: repeatValue})
+    setTask({ ...taskState, repeat: repeatValue })
   }
 
   const addNewTask = event => {
@@ -67,14 +69,22 @@ const TaskModal = (props) => {
   }
 
   const repeatValues = [
-    {text: `Don't Repeat`,
-    value: 'no-repeat'},
-    {text: 'Daily',
-    value: 'daily',},
-    {text: 'Weekly',
-    value: 'weekly'},
-    {text: 'Monthly',
-    value: 'monthly'}
+    {
+      text: `Don't Repeat`,
+      value: 'no-repeat'
+    },
+    {
+      text: 'Daily',
+      value: 'daily',
+    },
+    {
+      text: 'Weekly',
+      value: 'weekly'
+    },
+    {
+      text: 'Monthly',
+      value: 'monthly'
+    }
   ]
 
   const repeatOptions = _.map(repeatValues.text, (value, index) => ({
@@ -85,67 +95,67 @@ const TaskModal = (props) => {
 
   return (
     <div>
-    <Modal.Header>New Task</Modal.Header>
+      <Modal.Header className="taskHeader">New Task</Modal.Header>
       <Modal.Content>
-      {/* In case I want to do a description instead of a header
+        {/* In case I want to do a description instead of a header
       
       <Modal.Description>
         <Header>Default Profile Image</Header>
       </Modal.Description> */}
-      <div className='task-form'>
-        <Form>
-          <Form.Field
-            label='Title'
-            name='title'
-            control={Input}
-            value={taskState.title}
-            onChange={changeHandler} />
+        <div className='task-form'>
+          <Form>
+            <Form.Field
+              label='Title'
+              name='title'
+              control={Input}
+              value={taskState.title}
+              onChange={changeHandler} />
 
-          <Form.Field 
-            label='Description'
-            control={TextArea}
-            name='description' 
-            value={taskState.description} 
-            onChange={changeHandler} />
+            <Form.Field
+              label='Description'
+              control={TextArea}
+              name='description'
+              value={taskState.description}
+              onChange={changeHandler} />
+            <div className="dateDiv">
+              <DatePicker
+                selected={taskState.scheduled_at}
+                onChange={dateHandler}
+                name='scheduled_at'
+                showTimeSelect
+                timeFormat="HH:mm"
+                timeIntervals={15}
+                dateFormat="MMMM d, yyyy h:mm aa"
+                timeCaption="time" />
 
-          <DatePicker
-            selected={taskState.scheduled_at}
-            onChange={dateHandler}
-            name='scheduled_at'
-            showTimeSelect
-            timeFormat="HH:mm"
-            timeIntervals={15}
-            dateFormat="MMMM d, yyyy h:mm aa"
-            timeCaption="time" />
-
-          {/* <Dropdown
+              {/* <Dropdown
             placeholder='Repeat Task?'
             selection={taskState.repeat}
             onChange={repeatHandler}
             options={repeatOptions} /> */}
-            <Dropdown 
-              name={taskState.repeat}
-              placeholder='Repeat Task?' 
-              value={repeatOptions.text}
-              selection 
-              options={repeatOptions} 
-              onChange={(event) => repeatHandler(event.target.textContent)}/>
-
+              <Dropdown
+                name={taskState.repeat}
+                placeholder='Repeat Task?'
+                value={repeatOptions.text}
+                selection
+                options={repeatOptions}
+                onChange={(event) => repeatHandler(event.target.textContent)} />
+            </div>
           </Form>
-        <Button 
-          positive 
-          icon='checkmark' 
-          labelPosition='right' 
-          content='Add New Task' 
-          onClick={addNewTask} />
-      </div>
-    </Modal.Content>
-    </div> 
+          <Button
+            positive
+            icon='checkmark'
+            labelPosition='right'
+            content='Add New Task'
+            onClick={addNewTask} />
+        </div>
+      </Modal.Content>
+    </div>
   )
 }
 
 
-export default TaskModal
+export default TaskModal;
 
 
 
