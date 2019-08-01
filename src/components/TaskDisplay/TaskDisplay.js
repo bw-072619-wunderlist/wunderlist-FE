@@ -80,7 +80,12 @@ export default function TaskDisplay() {
                 <SubtaskItem {...subtask} delFunc={deleteSubtask} />
             ))}</ul>
 
-            <div onClick={addSubtask}><i class='fas fa-plus fa-lg'></i></div>
+            <button
+                className="icon-btn"
+                onClick={addSubtask}
+            >
+                <i class='fas fa-plus fa-lg'></i>
+            </button>
 
             {/* <form onSubmit={() => alert('add collaborator')}>
                 <label>

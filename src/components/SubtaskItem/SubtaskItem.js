@@ -47,7 +47,7 @@ export default ({ completed, name, id, delFunc }) => {
         subtask.completed ? 'checkbox checked' : 'checkbox unchecked'
       }><i className="fas fa-check fa-sm"></i></button>
       <p>{subtask.name}</p>
-      <button className='del-icon' onClick={() => delFunc(id)}>
+      <button className='icon-btn' onClick={() => delFunc(id)}>
         <i className="fas fa-times fa-lg"></i>
       </button>
     </li>

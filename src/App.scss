@@ -3,8 +3,23 @@
 .app-container {
   text-align: center;
 
+  .icon-btn {
+    border: none;
+    background: none;
+    width: $small-btn;
+    height: $small-btn;
+    color: $off-black;
+  
+    * {
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
   .checkbox {
-    @include icon-btn;
+    @extend .icon-btn;
     border: 2px solid $primary-light;
     border-radius: 8.5px;
     // //kept for backward compatibility (remove later):
@@ -60,7 +75,7 @@
       height: 24px;
       margin: 19px 0;
 
-      * {
+      > * {
         margin: 0 16px 0 0;
         color: $accent-dark;
       }
@@ -78,10 +93,10 @@
         color: $accent-light;
       }
 
-      .del-icon {
-        @include icon-btn;
-        color: $off-black;
-      }
+      // .del-icon {
+      //   @extend .icon-btn;
+      //   color: $off-black;
+      // }
     }
   }
 }
