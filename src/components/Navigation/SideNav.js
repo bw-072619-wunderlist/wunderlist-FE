@@ -139,7 +139,7 @@ export default function AccordionExampleStandard(props) {
 
             </Accordion.Content>
             <Accordion.Title active={activeIndex === 0} index={0} onClick={handleClick}>
-                CALENDAR
+                <Link to='/calendar'>CALENDAR</Link>
               </Accordion.Title>
             {/* <Accordion.Content active={activeIndex === 0}>
               </Accordion.Content> */}

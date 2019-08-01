@@ -5,103 +5,103 @@
     width: 264px;
     display: inline-block;
     text-align: left;
-    
+
     .ui.accordion {
-      text-align: center;
-      color: #173630;
-      background:#E3F1DF;
-      font-family: 'Lato', sans-serif;
-      width: 264px;
-      height: 936px;
-      margin: 0;
-  };
-  
-  .ui.accordion .title:not(.ui) {
-      color: #1A2F77;
-      font-family: Lato;
-      font-size: 16px;
-      font-weight: 900;
-      letter-spacing: 4.57px;	
-      line-height: 19px;	
-      text-align: center;
-  };
-  
-  .sideNavButtons {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      margin-left: 20px;
-      padding-top: 10px;
-  };
-  
-  .lists {
-      height: 74px;
-      width: 110px;
-  }
-  
-  .listTitle {	
-      height: 20px;
-      width: 78.1px;
-      color: #233A6D;
-      font-family: Lato;
-      font-size: 16px;
-      line-height: 20px;
-  };
-  .listDiv {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      margin-left: 30px;
-  }
-  .NavIcon {
-        height: 24px;
-        width: 24px;
-        border-radius: 8.5px;
-        background-color: #BBE5B3;
-        margin-right: 20px;
-  }
-  
-  .ui.accordion:not(.styled) .title~.content:not(.ui).active.profileCard {
-      height: 209px;
-      width: 200px;
-      border: 1px solid #979797;	
-      background-color: #FFFFFF;
-      box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-evenly;
-  }
-  
-  a, .editProfileBtn {
-      height: 20px;
-      width: 79px;	
-      color: #233A6D;	
-      font-family: Lato;
-      font-size: 16px;
-      line-height: 20px;
-  }
-  
-  .ui.fitted.toggle.checkbox {
-      border: none;
-      background: none;
-  }
-  
-  .ui.toggle.checkbox input:checked~.box:before, .ui.toggle.checkbox input:checked~label:before {
-      background-color: #BBE5B3!important;
-  }
-  
-  .ui.toggle.checkbox input:focus:checked~.box:before, .ui.toggle.checkbox input:focus:checked~label:before {
-       background-color:#BBE5B3!important;
-  }
-  
-  .toggleDiv {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-  }
-  
-  .toggleLabel {
-      margin: 0 10px 0 10px;
-  }
+        text-align: center;
+        color: #173630;
+        background:#E3F1DF;
+        font-family: 'Lato', sans-serif;
+        width: 264px;
+        height: 936px;
+        margin: 0;
+    };
+    
+    .ui.accordion .title:not(.ui) {
+        color: #1A2F77;
+        font-family: Lato;
+        font-size: 16px;
+        font-weight: 900;
+        letter-spacing: 4.57px;	
+        line-height: 19px;	
+        text-align: center;
+    };
+    
+    .sideNavButtons {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-left: 20px;
+        padding-top: 10px;
+    };
+    
+    .lists {
+        height: 74px;
+        width: 110px;
+    }
+    
+    .listTitle {	
+        height: 20px;
+        width: 78.1px;
+        color: #233A6D;
+        font-family: Lato;
+        font-size: 16px;
+        line-height: 20px;
+    };
+    .listDiv {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-left: 30px;
+    }
+    .NavIcon {
+          height: 24px;
+          width: 24px;
+          border-radius: 8.5px;
+          background-color: #BBE5B3;
+          margin-right: 20px;
+    }
+    
+    .ui.accordion:not(.styled) .title~.content:not(.ui).active.profileCard {
+        height: 209px;
+        width: 200px;
+        border: 1px solid #979797;	
+        background-color: #FFFFFF;
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+    
+    a, .editProfileBtn {
+        height: 20px;
+        width: 79px;	
+        color: #233A6D;	
+        font-family: Lato;
+        font-size: 16px;
+        line-height: 20px;
+    }
+    
+    .ui.fitted.toggle.checkbox {
+        border: none;
+        background: none;
+    }
+    
+    .ui.toggle.checkbox input:checked~.box:before, .ui.toggle.checkbox input:checked~label:before {
+        background-color: #BBE5B3!important;
+    }
+    
+    .ui.toggle.checkbox input:focus:checked~.box:before, .ui.toggle.checkbox input:focus:checked~label:before {
+         background-color:#BBE5B3!important;
+    }
+    
+    .toggleDiv {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .toggleLabel {
+        margin: 0 10px 0 10px;
+    }
 }

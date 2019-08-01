@@ -3,8 +3,33 @@
 .app-container {
   text-align: center;
 
+  .gone {
+    display: none;
+  }
+
+  .icon-btn {
+    border: none;
+    background: none;
+    width: $small-btn;
+    height: $small-btn;
+    color: $off-black;
+  
+    * {
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .text-btn {
+    text-align: center;
+    background: white;
+    border: 1px solid $off-black;
+  }
+
   .checkbox {
-    @include icon-btn;
+    @extend .icon-btn;
     border: 2px solid $primary-light;
     border-radius: 8.5px;
     // //kept for backward compatibility (remove later):
@@ -48,20 +73,34 @@
     }
   }
 
+  form {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 500px;
+
+    label {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+
   ul {
     max-width: 500px;
     margin: auto;
     font-size: 16px;
     font-family: 'Lato';
-    color: $accent-dark;
 
     li {
       display: flex;
+      align-items: center;
       height: 24px;
       margin: 19px 0;
 
-      * {
+      > * {
         margin: 0 16px 0 0;
+        color: $accent-dark;
       }
   
       > :last-child {
@@ -77,10 +116,10 @@
         color: $accent-light;
       }
 
-      .del-icon {
-        @include icon-btn;
-        color: $off-black;
-      }
+      // .del-icon {
+      //   @extend .icon-btn;
+      //   color: $off-black;
+      // }
     }
   }
 }

@@ -1,57 +1,64 @@
-// import React, { useState, useEffect } from 'react';
-// import BigCalendar from 'react-big-calendar';
-// import moment from 'moment';
+import React, { useEffect, useState } from "react";
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import moment from "moment";
+import "react-big-calendar/lib/sass/styles.scss";
 
-// import AxiosWithAuth from '../../utils/AxiosWithAuth';
+import AxiosWithAuth from '../../utils/AxiosWithAuth'
 
-// import 'react-big-calendar/lib/css/react-big-calendar.css';
+// import { Notify } from "react-redux-notify";
+import { Card, Button } from "semantic-ui-react";
 
-// moment.locale('en-GB');
-// BigCalendar.momentLocalizer(moment);
+const localizer = momentLocalizer(moment);
 
-// const CalendarDisplay = () => {
-//   const [calEvents, setCalEvents] = useState([])
+let components = {
+  // eventWrapper: Card // used by each view (Month, Day, Week),
+  // dateCellWrapper: Card
+  // toolbar: Button
+};
 
-//   const convertDate = (date) => {
-//     return moment.utc(date).toDate()
-//   }
+const CalendarDisplay = () => {
+  const [tasks, setTasks] = useState({})
 
-//   useEffect(() => {
-//     AxiosWithAuth()
-//       .get('https://wunderlist-be.herokuapp.com/api/v2/todos')
-//       .then(response => {
-//         console.log(response.data);
-//         let tasks = response.data;
+  useEffect(() => {
+    AxiosWithAuth()
+        .get('https://wunderlist-be.herokuapp.com/api/v2/todos')
+        .then(response => {
+            console.log(response.data)
+            setTasks(response.data)
+        })
+        .catch(response => {
+            console.log(response)
+        })
+},[])
 
-//         for (let i = 0; i < tasks.length; i++) {
-//           tasks[i].start = convertDate(tasks[i].start)
-//           tasks[i].end = convertDate(tasks[i].end)
-//         }
-//         setCalEvents({
-//           calEvents:tasks
-//         })
-//         console.log(calEvents)
-  
-//       })
-//       .catch(function (error) {
-//         console.log(error);
-//       });
-//   })
+  return (
+    <div>
+       {/* <Calendar
+        localizer={localizer}
+        events={tasks.map((task, index) => ({
+          id: task.id,
+          title: task.title,
+          allDay: false,
+          start: new Date(task.date.split("|")[0]),
+          end: new Date(task.date.split("|")[1])
+        }))}
+        startAccessor="start"
+        endAccessor="end"
+        onSelectSlot={e => {
+          this.setState({
+            modal: true,
+            event: {
+              eventStarts: e.start,
+              eventEnds: e.end
+            }
+          });
+        }}
+        selectable
+        defaultView="week"
+        components={components}
+      /> */}
+    </div>
+  );
+}
 
-//   return (
-//     <div>
-//       This is a calendar
-//       <div style={{ height: 700 }}>
-//         <Calendar
-//           events={calEvents}
-//           step={30}
-//           defaultView='month'
-//           views={['month','week','day']}
-//           defaultDate={new Date()}
-//         />
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default CalendarDisplay
+export default CalendarDisplay;
