@@ -24,8 +24,6 @@ const Login = (props) => {
   const handleSubmit = event => {
     event.preventDefault();
     setLoading(true)
-    console.log(loading)
-    console.log(login)
     axios
       .post('https://wunderlist-be.herokuapp.com/api/v2/auths/login', login)
       .then(response => {
@@ -33,7 +31,6 @@ const Login = (props) => {
         setLoading(false)
         localStorage.setItem('token', response.data.token)
         const data = response.data;
-        console.log(data);
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('data', JSON.stringify(response.data));
       })

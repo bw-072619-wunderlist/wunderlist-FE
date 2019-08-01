@@ -17,8 +17,6 @@ import CalendarDisplay from '../Calendar/Calendar'
 import Search from '../Search/Search'
 import AxiosWithAuth from '../../utils/AxiosWithAuth';
 
-
-
 const MainPage = (props) => {
   const [tasks, setTasks] = useState([])
   const [filteredTasks, setFilteredTasks] = useState([])
