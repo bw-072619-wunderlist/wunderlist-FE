@@ -4,16 +4,29 @@ import { Button, Header, Image, Modal, Form, Checkbox } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css';
 import './editProfile.scss';
 
+import Login from '../Login/Login';
+
 
 const EditProfile = (props) => {
-  console.log(props);
-  const mockPerson = {
-      id: 1, avatar: 'https://www.pngkey.com/png/detail/115-1150152_default-profile-picture-avatar-png-green.png', username: 'Kayla_Rae', email: 'kayla.rae@example.com', notification: false, password: 'abc'
-};
+    console.log(props);
 
-    const [person, setPerson] = useState(mockPerson);
-  
-  
+    const person = props.person;
+    const setPerson = props.setPerson;
+
+    // JSON.parse(props.data);
+    // const data = JSON.parse(localStorage.getItem('data')) || { id: 0, avatar: "", username: "", email: "", notify: true, password: "", token: "" };
+    // const [person, setPerson] = useState(data);
+
+    // const { id, avatar, username, email, notify, password } = data;
+    
+    // useEffect(() => {
+    //     localStorage.setItem('data', JSON.stringify(person))
+    // }, [person]);
+        
+//   const mockPerson = {
+//       id: 0, avatar: 'https://www.pngkey.com/png/detail/115-1150152_default-profile-picture-avatar-png-green.png', username: 'Kayla_Rae', email: 'kayla.rae@example.com', notification: false, password: 'abc'
+// };
+
   console.log(person);
 
   const editPerson = event => {
@@ -24,12 +37,13 @@ const EditProfile = (props) => {
   };
 
   const toggleNotification = notification => {
-      setPerson({ ...person, 'notification': !notification });
+      setPerson({ ...person, 'notify': !notification });
   }
 
   const onSubmit = event => {
       event.preventDefault();
       editPerson(event);
+      props.close();
       console.log(person);
   };
 
@@ -56,7 +70,7 @@ const EditProfile = (props) => {
                   <label>Get email notifications</label>
                   <label>Off</label>
 
-                  <Checkbox toggle checked={person.notification} name='notification' onChange={() => toggleNotification(person.notification)} />
+                  <Checkbox toggle checked={person.notify} name='notify' onChange={() => toggleNotification(person.notify)} />
                   <label>On</label>
               </Form.Field>
               <Form.Field>
