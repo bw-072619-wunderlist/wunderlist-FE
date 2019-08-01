@@ -3,7 +3,11 @@ import { Switch } from 'react-router-dom'
 import Navbar from '../Navigation/UpperNav';
 import AccordionExampleStandard from '../Navigation/SideNav';
 import Home from '../Home/Home';
+<<<<<<< HEAD
 import { withRouter } from 'react-router'
+=======
+import Testing from '../../testing/testing';
+>>>>>>> a906bafa7ef997efdb92ae44271a0f19bad6c879
 
 import PrivateRoute from '../../utils/PrivateRoute';
 // import { TaskContext } from './contexts/TaskContext'
@@ -74,6 +78,7 @@ const MainPage = (props) => {
                 <PrivateRoute path='/task/:id' component={(props) => <TaskDisplay match={props.match} />} />
                 <PrivateRoute path='/calendar' component={CalendarDisplay} />
                 <PrivateRoute path='/search' component={(props) => <Search filteredTasks={filteredTasks} />} />
+                <PrivateRoute path='/testing' component={Testing} />
             </div>
           {/* </TaskContext.Provider> */}
         </div>
