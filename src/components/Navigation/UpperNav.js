@@ -34,14 +34,8 @@ export default function NavBar(props) {
       });
   }, [])
 
-  const submitSearch = (event) => {
-    event.preventDefault()
-    const filteredTasks = tasks.filter(task => task.title.includes(search))
-    console.log(filteredTasks)
-  }
-  
-
   console.log(search)
+  console.log(props)
 
   const show = () => setOpen( true );
   const close = () => setOpen(false)
@@ -50,7 +44,7 @@ export default function NavBar(props) {
     <div className="Nav">
       <Link to="#" className="Search">
         <Input focus={showSearch} placeholder='Search...' name='search' value={search} onChange={searchHandler} />
-        <Icon className="searchIcon" name="search" size="large" onClick={submitSearch} />
+        <Icon className="searchIcon" name="search" size="large" onClick={props.submitSearch} />
       </Link>
         <div className="Navbar">
           <Link to="#" className="current">HOME</Link>

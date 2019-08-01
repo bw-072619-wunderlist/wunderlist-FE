@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Accordion, Icon, Image, Checkbox, Modal } from 'semantic-ui-react';
 import EditProfile from '../Profile/editProfile';
 
@@ -26,6 +26,10 @@ export default function AccordionExampleStandard(props) {
 
     const toggleNotification = notification => {
         setPerson({ ...person, 'notify': !notification });
+    }
+
+    const signOut = () => {
+      localStorage.removeItem('token')
     }
 
     const [openModal, setOpen] = useState(false)
@@ -57,7 +61,7 @@ export default function AccordionExampleStandard(props) {
                     <label className="toggleLabel">On</label>
                 </div>
                 <div>{person.email}</div>
-                <Link to='#'>Sign Out</Link>
+                <Link to='/login' onClick={signOut}>Sign Out</Link>
             </Accordion.Content>
             <Accordion.Title active={activeIndex === 1} index={1} onClick={handleClick}>
                 HOME

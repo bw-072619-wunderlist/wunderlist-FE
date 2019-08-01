@@ -12,25 +12,36 @@ import './main.scss';
 
 import TaskDisplay from '../TaskDisplay/TaskDisplay';
 import CalendarDisplay from '../Calendar/Calendar'
-// import CreateTask from '../CreateTask/CreateTask'
+import Search from '../Search/Search'
 
 
 
 export default function MainPage(props) {
   const [tasks, setTasks] = useState([])
+  const [filteredTasks, setFilteredTasks] = useState('')
+
+  const submitSearch = (event) => {
+    event.preventDefault()
+    const searchTerm = ''
+    const filtered = tasks.filter(task => task.title.includes(searchTerm))
+    setFilteredTasks(filtered)
+    console.log(filtered)
+    props.history.push('/search')
+  }
 
     return (
         <div>
           {/* <TaskContext.Provider value={{ tasks }}> */}
-            <Navbar />
+            <Navbar submitSearch={submitSearch} />
             <div className="mainPage">
-                <AccordionExampleStandard />
+                <AccordionExampleStandard  />
                 {/* <Calendar /> */}
                 <PrivateRoute exact path='/' component={(props) => <Home />} />
                 {/* <PrivateRoute exact path="/profile/edit" component={(props) => <EditProfile />} /> */}
                 {/* <PrivateRoute exact path='/create' component={(props) => <CreateTask />} /> */}
                 <PrivateRoute path='/task/:id' component={(props) => <TaskDisplay match={props.match} />} />
                 <PrivateRoute path='/calendar' component={CalendarDisplay} />
+                <PrivateRoute path='/search' component={(props) => <Search filteredTasks={filteredTasks} />} />
             </div>
           {/* </TaskContext.Provider> */}
         </div>
