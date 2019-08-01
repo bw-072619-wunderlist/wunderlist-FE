@@ -31,6 +31,7 @@ const Login = (props) => {
         setLoading(false)
         // user(response.data)
         localStorage.setItem('token', response.data.token)
+        console.log(response)
       })
       .then(props.history.push('/'))
       .catch(response => {
