@@ -5,7 +5,7 @@ export default (initVal) => {
 
     function updateSubtask(newVersion) {
         const target = subtasks.findIndex(item => {
-            return item.id === newItemnewVersion.id;
+            return item.id === newVersion.id;
         });
         const updatedSubtask = {...subtasks[target], ...newVersion};
         const oldOmitted = subtasks.filter(oldItem => oldItem.id !== newVersion.id);
@@ -20,5 +20,5 @@ export default (initVal) => {
         setSubtasks(pending.concat(finished));
     }
 
-    return [subtasks, updateSubtask];
+    return [subtasks, setSubtasks, updateSubtask];
 };

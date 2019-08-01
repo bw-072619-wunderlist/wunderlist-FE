@@ -29,6 +29,14 @@ export default function TaskDisplay() {
         return [...unsorted].sort(compareSubtasks);
     }
 
+    function addSubtask() { //TODO: Allow adding user-given items.
+        setSubtasks(sortedSubtasks([...subtasks, {
+            name: "example",
+            completed: false,
+            id: 778
+        }]));
+    }
+
     useEffect(() => {
         AxiosWithAuth()
             .get(`https://wunderlist-be.herokuapp.com/api/v2/todos/2`)
@@ -59,6 +67,8 @@ export default function TaskDisplay() {
             <ul>{subtasks && subtasks.map(task => (
                 <SubtaskItem completed={task.completed} name={task.name} id={task.id} />
             ))}</ul>
+
+            <div onClick={addSubtask}><i class="fas fa-plus fa-lg"></i></div>
 
             <Modal size={'small'} open={openModal} onClose={close}>
                 <TaskModal task={task} />
