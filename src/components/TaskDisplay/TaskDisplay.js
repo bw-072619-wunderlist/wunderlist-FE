@@ -52,15 +52,15 @@ export default function TaskDisplay() {
 
     return (
         <div>
-            <div className="fluid-list">
+            <div className='fluid-list'>
                 <button className={
                     task.completed ? 'checkbox checked' : 'checkbox unchecked'
                 }>
-                    <i className="fas fa-check fa-sm"></i>
+                    <i className='fas fa-check fa-sm'></i>
                 </button>
                 <h1>hello world</h1>
                 <div onClick={show}>
-                    <i class="fas fa-pencil-alt fa-lg"></i>
+                    <i class='fas fa-pencil-alt fa-lg'></i>
                 </div>
             </div>
 
@@ -68,7 +68,16 @@ export default function TaskDisplay() {
                 <SubtaskItem completed={task.completed} name={task.name} id={task.id} />
             ))}</ul>
 
-            <div onClick={addSubtask}><i class="fas fa-plus fa-lg"></i></div>
+            <div onClick={addSubtask}><i class='fas fa-plus fa-lg'></i></div>
+
+            {/* <form onSubmit={() => alert('add collaborator')}>
+                <label>
+                    <h2>Add Collaborator:</h2>
+                    <input type="text" id="name" value={"fix this"} onChange={() => console.log('fix this too')} />
+                </label>
+            </form> */}
+
+            <h2>!!current collaborator!!</h2>
 
             <Modal size={'small'} open={openModal} onClose={close}>
                 <TaskModal task={task} />
