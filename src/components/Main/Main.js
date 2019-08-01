@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Switch } from 'react-router-dom'
 import Navbar from '../Navigation/UpperNav';
 import AccordionExampleStandard from '../Navigation/SideNav';
 import Home from '../Home/Home';
@@ -52,7 +53,20 @@ const MainPage = (props) => {
     return (
         <div>
           {/* <TaskContext.Provider value={{ tasks }}> */}
-            <Navbar submitSearch={submitSearch} />
+          <Switch>
+            <PrivateRoute
+              path='/task'
+              component={props => (
+              <Navbar submitSearch={submitSearch} header='VIEW' />
+              )}
+            />
+            <PrivateRoute
+              path='/'
+              component={props => (
+              <Navbar submitSearch={submitSearch} header='HOME' />
+              )}
+            />
+          </Switch>
             <div className="mainPage">
                 <AccordionExampleStandard  />
                 {/* <Calendar /> */}

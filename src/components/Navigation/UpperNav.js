@@ -34,7 +34,7 @@ export default function NavBar(props) {
         <Icon className="searchIcon" name="search" size="large" onClick={(event) => props.submitSearch(event, search)} />
       </div>
         <div className="Navbar">
-          <Link to="#" className="current">HOME</Link>
+          <Link to="#" className="current">{props.header}</Link>
           <div className="addNav">
             <button className='addButton' onClick={show}>+</button>
             <Modal size={'small'} open={openModal} onClose={close}>

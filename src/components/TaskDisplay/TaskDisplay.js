@@ -29,6 +29,14 @@ export default function TaskDisplay() {
         return [...unsorted].sort(compareSubtasks);
     }
 
+    function addSubtask() { //TODO: Allow adding user-given items.
+        setSubtasks(sortedSubtasks([...subtasks, {
+            name: "example",
+            completed: false,
+            id: 778
+        }]));
+    }
+
     useEffect(() => {
         AxiosWithAuth()
             .get(`https://wunderlist-be.herokuapp.com/api/v2/todos/2`)
@@ -42,34 +50,34 @@ export default function TaskDisplay() {
             });
     }, []);
 
-    // const addUser = () => {
-    //   const todoID = task.id
-    //   const userID = 
-    //   AxiosWithAuth()
-    //     .put(`https://wunderlist-be.herokuapp.com/api/v2/todos/${todoID}/users/${userID}`)
-    //     .then(response => {
-    //       console.log(response)
-    //     })
-    //     .catch(response => {
-    //       console.log(response)
-    //     })
-    // }
-
     return (
         <div>
-            <div className="fluid-list">
-                <div className={
+            <div className='fluid-list'>
+                <button className={
                     task.completed ? 'checkbox checked' : 'checkbox unchecked'
                 }>
-                    <i className="fas fa-check fa-sm"></i>
-                </div>
+                    <i className='fas fa-check fa-sm'></i>
+                </button>
                 <h1>hello world</h1>
-                <button onClick={show}>Edit Task</button>
+                <div onClick={show}>
+                    <i class='fas fa-pencil-alt fa-lg'></i>
+                </div>
             </div>
 
             <ul>{subtasks && subtasks.map(task => (
                 <SubtaskItem completed={task.completed} name={task.name} id={task.id} />
             ))}</ul>
+
+            <div onClick={addSubtask}><i class='fas fa-plus fa-lg'></i></div>
+
+            {/* <form onSubmit={() => alert('add collaborator')}>
+                <label>
+                    <h2>Add Collaborator:</h2>
+                    <input type="text" id="name" value={"fix this"} onChange={() => console.log('fix this too')} />
+                </label>
+            </form> */}
+
+            <h2>!!current collaborator!!</h2>
 
             <Modal size={'small'} open={openModal} onClose={close}>
                 <TaskModal task={task} />

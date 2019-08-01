@@ -38,13 +38,13 @@ export default ({ completed, name, id }) => {
 
     return (
         <li>
-            <div onClick={toggleSubTask} className={
+            <button onClick={toggleSubTask} className={
                 completed ? 'checkbox checked' : 'checkbox unchecked'
-            }><i className="fas fa-check fa-sm"></i></div>
+            }><i className="fas fa-check fa-sm"></i></button>
             <p>{name}</p>
-            <div className='del-icon' onClick={deleteSubTask}>
+            <button className='del-icon' onClick={deleteSubTask}>
                 <i className="fas fa-times fa-lg"></i>
-            </div>
+            </button>
         </li>
     )
 }

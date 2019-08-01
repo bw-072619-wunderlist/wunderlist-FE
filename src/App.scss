@@ -1,27 +1,32 @@
-@import './styles/variables.scss';
+@import './styles/mixins.scss';
 
 .app-container {
   text-align: center;
 
   .checkbox {
+    @include icon-btn;
     border: 2px solid $primary-light;
     border-radius: 8.5px;
-    width: 24px;
-    height: 24px;
-    font-size: 1rem;
-    text-align: center;
-  }
+    // //kept for backward compatibility (remove later):
+    // font-size: 1rem;
+    // text-align: center;
+    // width: $small-btn;
+    // height: $small-btn;
 
-  .unchecked {
-    background-color: white;
-
-    * {
-      visibility: hidden;
+    // * {
+    //   margin: auto;
+    // }
+    &.unchecked {
+      background-color: white;
+  
+      * {
+        visibility: hidden;
+      }
     }
-  }
-
-  .checked {
-    background-color: $primary-light;
+  
+    &.checked {
+      background-color: $primary-light;
+    }
   }
 
   .fluid-list {
@@ -73,6 +78,7 @@
       }
 
       .del-icon {
+        @include icon-btn;
         color: $off-black;
       }
     }
