@@ -1,27 +1,57 @@
-@import './styles/variables.scss';
+@import './styles/mixins.scss';
 
 .app-container {
   text-align: center;
 
-  .checkbox {
-    border: 2px solid $primary-light;
-    border-radius: 8.5px;
-    width: 24px;
-    height: 24px;
-    font-size: 1rem;
-    text-align: center;
+  .gone {
+    display: none;
   }
 
-  .unchecked {
-    background-color: white;
-
+  .icon-btn {
+    border: none;
+    background: none;
+    width: $small-btn;
+    height: $small-btn;
+    color: $off-black;
+  
     * {
-      visibility: hidden;
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 
-  .checked {
-    background-color: $primary-light;
+  .text-btn {
+    text-align: center;
+    background: white;
+    border: 1px solid $off-black;
+  }
+
+  .checkbox {
+    @extend .icon-btn;
+    border: 2px solid $primary-light;
+    border-radius: 8.5px;
+    // //kept for backward compatibility (remove later):
+    // font-size: 1rem;
+    // text-align: center;
+    // width: $small-btn;
+    // height: $small-btn;
+
+    // * {
+    //   margin: auto;
+    // }
+    &.unchecked {
+      background-color: white;
+  
+      * {
+        visibility: hidden;
+      }
+    }
+  
+    &.checked {
+      background-color: $primary-light;
+    }
   }
 
   .fluid-list {
@@ -43,20 +73,34 @@
     }
   }
 
+  form {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 500px;
+
+    label {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+
   ul {
     max-width: 500px;
     margin: auto;
     font-size: 16px;
     font-family: 'Lato';
-    color: $accent-dark;
 
     li {
       display: flex;
+      align-items: center;
       height: 24px;
       margin: 19px 0;
 
-      * {
+      > * {
         margin: 0 16px 0 0;
+        color: $accent-dark;
       }
   
       > :last-child {
@@ -72,9 +116,10 @@
         color: $accent-light;
       }
 
-      .del-icon {
-        color: $off-black;
-      }
+      // .del-icon {
+      //   @extend .icon-btn;
+      //   color: $off-black;
+      // }
     }
   }
 }

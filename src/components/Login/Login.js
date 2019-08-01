@@ -9,7 +9,7 @@ import './Login.scss';
 
 const Login = (props) => {
   console.log(props);
-  
+
   // const { user } = useContext(UserContext)
 
   const [login, setLogin] = useState({
@@ -24,8 +24,6 @@ const Login = (props) => {
   const handleSubmit = event => {
     event.preventDefault();
     setLoading(true)
-    console.log(loading)
-    console.log(login)
     axios
       .post('https://wunderlist-be.herokuapp.com/api/v2/auths/login', login)
       .then(response => {
@@ -34,10 +32,10 @@ const Login = (props) => {
         localStorage.setItem('token', response.data.token)
         const data = response.data;
         console.log(data);
-        localStorage.setItem('token', response.data.token);
+        // localStorage.setItem('token', response.data.token);
         localStorage.setItem('data', JSON.stringify(response.data));
       })
-      .then(props.history.push('/'))
+      // .then(props.history.push('/'))
       .catch(response => {
         console.log(response.error)
       })

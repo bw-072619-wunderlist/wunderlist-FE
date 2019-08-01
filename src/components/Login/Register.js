@@ -25,6 +25,7 @@ const Register = (props) => {
       .post('https://wunderlist-be.herokuapp.com/api/v2/auths/register', register)
       .then(response => {
         localStorage.setItem('token', response.data.token)
+        localStorage.setItem('data', JSON.stringify(response.data));
       })
       .then(props.history.push('/'))
       .catch(response => {
