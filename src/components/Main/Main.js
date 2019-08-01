@@ -3,11 +3,8 @@ import { Switch } from 'react-router-dom'
 import Navbar from '../Navigation/UpperNav';
 import AccordionExampleStandard from '../Navigation/SideNav';
 import Home from '../Home/Home';
-<<<<<<< HEAD
 import { withRouter } from 'react-router'
-=======
 import Testing from '../../testing/testing';
->>>>>>> a906bafa7ef997efdb92ae44271a0f19bad6c879
 
 import PrivateRoute from '../../utils/PrivateRoute';
 // import { TaskContext } from './contexts/TaskContext'
