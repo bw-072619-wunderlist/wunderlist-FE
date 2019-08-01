@@ -16,14 +16,16 @@ const TaskModal = (props) => {
     scheduled_at: null,
   })
   
-  // if (props.task) {
-  //   setTask({
-  //     title: task.title,
-  //     description: task.description,
-  //     repeat: task.repeat,
-  //     scheduled_at: task.scheduled_at
-  //   })
-  // }
+  useEffect(() => {
+    if (props.task) {
+      setTask({
+        title: props.task.title,
+        description: props.task.description,
+        repeat: props.task.repeat,
+        scheduled_at: props.task.scheduled_at
+      })
+    }
+  },[])
 
   console.log(props.task)
 
