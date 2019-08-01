@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
-import { Modal, Form, Input, Button, TextArea, Dropdown } from 'semantic-ui-react'
+import { Modal, Form, Input, Button, TextArea, Radio } from 'semantic-ui-react'
 import DatePicker from 'react-datepicker'
 
 import AxiosWithAuth from '../../utils/AxiosWithAuth';
@@ -15,6 +15,7 @@ const TaskModal = (props) => {
     repeat: 'no-repeat',
     scheduled_at: null,
   })
+  const [radioStatus, setRadio] = useState('no_repeat')
   
   useEffect(() => {
     if (props.task) {
@@ -27,7 +28,7 @@ const TaskModal = (props) => {
     }
   },[])
 
-  // console.log(props.task)
+  console.log(taskState)
 
   const changeHandler = (event) => {
     setTask({ 
@@ -40,10 +41,16 @@ const TaskModal = (props) => {
     console.log(taskState)
   }
 
-  const repeatHandler = repeatValue => {
-    console.log(repeatValue)
-    setTask({ ...taskState, repeat: repeatValue})
-  }
+  const repeatHandler = (e, value) => {
+    setRadio(value.value)
+  console.log(value)}
+
+  useEffect(() =>{
+    setTask({
+      ...taskState,
+      repeat: radioStatus
+    })
+  },[radioStatus])
 
   const addNewTask = event => {
     event.preventDefault();
@@ -65,23 +72,6 @@ const TaskModal = (props) => {
     event.preventDefault()
 
   }
-
-  const repeatValues = [
-    {text: `Don't Repeat`,
-    value: 'no-repeat'},
-    {text: 'Daily',
-    value: 'daily',},
-    {text: 'Weekly',
-    value: 'weekly'},
-    {text: 'Monthly',
-    value: 'monthly'}
-  ]
-
-  const repeatOptions = _.map(repeatValues.text, (value, index) => ({
-    key: repeatValues.value[index],
-    text: value,
-    value: repeatValues.value[index]
-  }))
 
   return (
     <div>
@@ -117,19 +107,45 @@ const TaskModal = (props) => {
             timeIntervals={15}
             dateFormat="MMMM d, yyyy h:mm aa"
             timeCaption="time" />
-
-          {/* <Dropdown
-            placeholder='Repeat Task?'
-            selection={taskState.repeat}
-            onChange={repeatHandler}
-            options={repeatOptions} /> */}
-            <Dropdown 
-              name={taskState.repeat}
-              placeholder='Repeat Task?' 
-              value={repeatOptions.text}
-              selection 
-              options={repeatOptions} 
-              onChange={(event) => repeatHandler(event.target.textContent)}/>
+          <Form.Field>
+            Selected value: <b>{radioStatus}</b>
+          </Form.Field>
+          <Form.Field>
+            <Radio
+              label='No repeat'
+              name='radioGroup'
+              value='no_repeat'
+              checked={radioStatus === 'no_repeat'}
+              onChange={repeatHandler}
+            />
+          </Form.Field>
+          <Form.Field>
+            <Radio
+              label='Daily'
+              name='radioGroup'
+              value='daily'
+              checked={radioStatus === 'daily'}
+              onChange={repeatHandler}
+            />
+          </Form.Field>
+          <Form.Field>
+            <Radio
+              label='Weekly'
+              name='radioGroup'
+              value='weekly'
+              checked={radioStatus === 'weekly'}
+              onChange={repeatHandler}
+            />
+          </Form.Field>
+          <Form.Field>
+            <Radio
+              label='Monthly'
+              name='radioGroup'
+              value='monthly'
+              checked={radioStatus === 'monthly'}
+              onChange={repeatHandler}
+            />
+          </Form.Field>
 
           </Form>
         <Button 
@@ -146,6 +162,11 @@ const TaskModal = (props) => {
 
 
 export default TaskModal
+
+
+  // handleChange = (e, { value }) => this.setState({ value })
+
+
 
 
 
@@ -171,4 +192,35 @@ const categoryOptions = _.map(categoryDefinitions, (category, index) => ({
 }))
 
 
+
+  const repeatValues = [
+    {text: `Don't Repeat`,
+    value: 'no-repeat'},
+    {text: 'Daily',
+    value: 'daily',},
+    {text: 'Weekly',
+    value: 'weekly'},
+    {text: 'Monthly',
+    value: 'monthly'}
+  ]
+
+  const repeatOptions = _.map(repeatValues.text, (value, index) => ({
+    key: repeatValues.value[index],
+    text: value,
+    value: repeatValues.value[index]
+  }))
+
+
+            {/* <Dropdown
+            placeholder='Repeat Task?'
+            selection={taskState.repeat}
+            onChange={repeatHandler}
+            options={repeatOptions} />
+            <Dropdown 
+              name={taskState.repeat}
+              placeholder='Repeat Task?' 
+              value={repeatOptions.text}
+              selection 
+              options={repeatOptions} 
+              onChange={(event) => repeatHandler(event.target.textContent)}/>
  */}
