@@ -6,6 +6,7 @@ import AxiosWithAuth from '../../utils/AxiosWithAuth';
 
 import TaskModal from '../TaskModal/TaskModal';
 import SubtaskItem from '../SubtaskItem/SubtaskItem';
+import TextForm from '../TextForm/TextForm';
 
 export default function TaskDisplay() {
     const [subtasks, setSubtasks] = useState([]);
@@ -86,6 +87,8 @@ export default function TaskDisplay() {
             >
                 <i class='fas fa-plus fa-lg'></i>
             </button>
+
+            <TextForm fields={['name', '', 'something']} />
 
             {/* <form onSubmit={() => alert('add collaborator')}>
                 <label>
