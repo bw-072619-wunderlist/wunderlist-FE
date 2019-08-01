@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Accordion, Icon, Image, Checkbox, Modal } from 'semantic-ui-react';
 import EditProfile from '../Profile/editProfile';
@@ -8,11 +8,14 @@ import './sideNav.scss';
 
 
 export default function AccordionExampleStandard(props) {
-    const mockPerson = {
-        id: 1, avatar: 'https://react.semantic-ui.com/images/avatar/large/rachel.png', username: 'Kayla_Rae', email: 'kayla.rae@example.com', notification: false, password: 'abc'
-    };
+    const data = JSON.parse(localStorage.getItem('data')) || { id: 0, avatar: "", username: "", email: "", notify: true, password: "", token: "" };
+    const [person, setPerson] = useState(data);
+
+    useEffect(() => {
+        localStorage.setItem('data', JSON.stringify(person))
+    }, [person]);
+
     const [activeIndex, setActiveIndex] = useState(0);
-    const [person, setPerson] = useState(mockPerson);
 
     const handleClick = (e, titleProps) => {
         const { index } = titleProps;
@@ -22,7 +25,7 @@ export default function AccordionExampleStandard(props) {
     }
 
     const toggleNotification = notification => {
-        setPerson({ ...person, 'notification': !notification });
+        setPerson({ ...person, 'notify': !notification });
     }
 
     const [openModal, setOpen] = useState(false)
@@ -35,25 +38,25 @@ export default function AccordionExampleStandard(props) {
         < Accordion >
         <div className="sideNavButtons">
             <Accordion.Title active={activeIndex === 0} index={0} onClick={handleClick}>
-                <Image src='https://react.semantic-ui.com/images/avatar/large/rachel.png' avatar />
+                <Image src={person.avatar} avatar />
                 Kayla_Rae
                   <Icon name='angle down' />
             </Accordion.Title>
             <Accordion.Content active={activeIndex === 0} className="profileCard">
                         <div className="editProfileBtn" onClick={show}>Edit Profile</div>
                         <Modal open={openModal} onClose={close}>
-                            <EditProfile />
-                            <Modal.Actions>
+                            <EditProfile close={close} person={person} setPerson={setPerson} />
+                            {/* <Modal.Actions>
                                 <button negative onClick={close}>Cancel</button>
-                            </Modal.Actions>
+                            </Modal.Actions> */}
                         </Modal>
                 <div>Get Email notifications</div>
                 <div className="toggleDiv">
                     <label className="toggleLabel">Off</label>
-                    <Checkbox toggle checked={person.notification} name='notification' onChange={() => toggleNotification(person.notification)} />
+                            <Checkbox toggle checked={person.notify} name='notify' onChange={() => toggleNotification(person.notify)} />
                     <label className="toggleLabel">On</label>
                 </div>
-                <div>kayla.rae@example.com</div>
+                <div>{person.email}</div>
                 <Link to='#'>Sign Out</Link>
             </Accordion.Content>
             <Accordion.Title active={activeIndex === 1} index={1} onClick={handleClick}>
