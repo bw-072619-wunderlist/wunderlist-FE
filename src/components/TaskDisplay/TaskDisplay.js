@@ -31,7 +31,7 @@ export default function TaskDisplay() {
 
     useEffect(() => {
         AxiosWithAuth()
-            .get(`https://wunderlist-be.herokuapp.com/api/v2/todos/1`)
+            .get(`https://wunderlist-be.herokuapp.com/api/v2/todos/2`)
             .then(res => {
                 setSubtasks(sortedSubtasks(res.data.tasks));
                 console.log(res.data)

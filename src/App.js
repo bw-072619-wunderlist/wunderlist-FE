@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Route } from 'react-router-dom';
 
 // import { UserContext } from './contexts/UserContext';
@@ -10,7 +10,6 @@ import MainPage from './components/Main/Main';
 
 
 function App() {
-
   const token = localStorage.getItem('token');
 
   if (!token) {
