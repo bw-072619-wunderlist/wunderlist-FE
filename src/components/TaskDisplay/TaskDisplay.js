@@ -42,19 +42,6 @@ export default function TaskDisplay() {
             });
     }, []);
 
-    // const addUser = () => {
-    //   const todoID = task.id
-    //   const userID = 
-    //   AxiosWithAuth()
-    //     .put(`https://wunderlist-be.herokuapp.com/api/v2/todos/${todoID}/users/${userID}`)
-    //     .then(response => {
-    //       console.log(response)
-    //     })
-    //     .catch(response => {
-    //       console.log(response)
-    //     })
-    // }
-
     return (
         <div>
             <div className="fluid-list">
@@ -64,7 +51,9 @@ export default function TaskDisplay() {
                     <i className="fas fa-check fa-sm"></i>
                 </div>
                 <h1>hello world</h1>
-                <button onClick={show}>Edit Task</button>
+                <div onClick={show}>
+                    <i class="fas fa-pencil-alt fa-lg"></i>
+                </div>
             </div>
 
             <ul>{subtasks && subtasks.map(task => (
