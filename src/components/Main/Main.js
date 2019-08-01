@@ -26,7 +26,7 @@ const MainPage = (props) => {
 
   const submitSearch = (event, searching) => {
     event.preventDefault()
-    setSearch(searching) 
+    setSearch(searching)
     console.log('submitSearch: ', searchTerm)
   }
 
@@ -43,43 +43,49 @@ const MainPage = (props) => {
 
   useEffect(() => {
     console.log('these are the Tasks:', tasks)
-    if (searchTerm.length > 0 ){
+    if (searchTerm.length > 0) {
       setFilteredTasks(tasks.filter(task => task.title.includes(searchTerm)))
       props.history.push('/search')
     }
     console.log('checking when this hits')
-  },[searchTerm])
+  }, [searchTerm])
 
-    return (
-        <div>
-          {/* <TaskContext.Provider value={{ tasks }}> */}
-          <Switch>
-            <PrivateRoute
-              path='/task'
-              component={props => (
-              <Navbar submitSearch={submitSearch} header='VIEW' />
-              )}
-            />
-            <PrivateRoute
-              path='/'
-              component={props => (
-              <Navbar submitSearch={submitSearch} header='HOME' />
-              )}
-            />
-          </Switch>
-            <div className="mainPage">
-                <AccordionExampleStandard  />
-                {/* <Calendar /> */}
-                <PrivateRoute exact path='/' component={(props) => <Home />} />
-                {/* <PrivateRoute exact path="/profile/edit" component={(props) => <EditProfile />} /> */}
-                {/* <PrivateRoute exact path='/create' component={(props) => <CreateTask />} /> */}
-                <PrivateRoute path='/task/:id' component={(props) => <TaskDisplay match={props.match} />} />
-                <PrivateRoute path='/calendar' component={CalendarDisplay} />
-                <PrivateRoute path='/search' component={(props) => <Search filteredTasks={filteredTasks} />} />
-            </div>
-          {/* </TaskContext.Provider> */}
-        </div>
-    )
+  return (
+    <div>
+      {/* <TaskContext.Provider value={{ tasks }}> */}
+      <Switch>
+        <PrivateRoute
+          path='/task'
+          component={props => (
+            <Navbar submitSearch={submitSearch} header='VIEW' />
+          )}
+        />
+        <PrivateRoute
+          path='/search'
+          component={props => (
+            <Navbar submitSearch={submitSearch} header='SEARCH' />
+          )}
+        />
+        <PrivateRoute
+          path='/'
+          component={props => (
+            <Navbar submitSearch={submitSearch} header='HOME' />
+          )}
+        />
+      </Switch>
+      <div className="mainPage">
+        <AccordionExampleStandard />
+        {/* <Calendar /> */}
+        <PrivateRoute exact path='/' component={(props) => <Home />} />
+        {/* <PrivateRoute exact path="/profile/edit" component={(props) => <EditProfile />} /> */}
+        {/* <PrivateRoute exact path='/create' component={(props) => <CreateTask />} /> */}
+        <PrivateRoute path='/task/:id' component={(props) => <TaskDisplay match={props.match} />} />
+        <PrivateRoute path='/calendar' component={CalendarDisplay} />
+        <PrivateRoute path='/search' component={(props) => <Search filteredTasks={filteredTasks} query={searchTerm} />} />
+      </div>
+      {/* </TaskContext.Provider> */}
+    </div>
+  )
 };
 
 export default withRouter(MainPage)
