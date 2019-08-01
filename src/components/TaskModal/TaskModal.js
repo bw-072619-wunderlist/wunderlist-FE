@@ -7,6 +7,7 @@ import AxiosWithAuth from '../../utils/AxiosWithAuth';
 
 import 'semantic-ui-css/semantic.min.css';
 import "react-datepicker/dist/react-datepicker.css";
+import "./TaskModal.scss";
 
 const TaskModal = (props) => {
   const [taskState, setTask] = useState({
@@ -26,18 +27,19 @@ const TaskModal = (props) => {
         scheduled_at: props.task.scheduled_at
       })
     }
-  },[])
+  }, [])
 
   console.log(taskState)
 
   const changeHandler = (event) => {
-    setTask({ 
+    setTask({
       ...taskState,
-      [event.target.name]: event.target.value 
-  })}
+      [event.target.name]: event.target.value
+    })
+  }
 
   const dateHandler = date => {
-    setTask({ ...taskState, scheduled_at: date})
+    setTask({ ...taskState, scheduled_at: date })
     console.log(taskState)
   }
 
@@ -75,9 +77,9 @@ const TaskModal = (props) => {
 
   return (
     <div>
-    <Modal.Header>New Task</Modal.Header>
+      <Modal.Header className="taskHeader">New Task</Modal.Header>
       <Modal.Content>
-      {/* In case I want to do a description instead of a header
+        {/* In case I want to do a description instead of a header
       
       <Modal.Description>
         <Header>Default Profile Image</Header>
@@ -97,6 +99,8 @@ const TaskModal = (props) => {
             name='description' 
             value={taskState.description} 
             onChange={changeHandler} />
+        <div className='date-div'>
+
 
           <DatePicker
             selected={taskState.scheduled_at}
@@ -107,6 +111,7 @@ const TaskModal = (props) => {
             timeIntervals={15}
             dateFormat="MMMM d, yyyy h:mm aa"
             timeCaption="time" />
+        </div>
           <Form.Field>
             Selected value: <b>{radioStatus}</b>
           </Form.Field>
@@ -148,20 +153,20 @@ const TaskModal = (props) => {
           </Form.Field>
 
           </Form>
-        <Button 
-          positive 
-          icon='checkmark' 
-          labelPosition='right' 
-          content='Add New Task' 
-          onClick={addNewTask} />
-      </div>
-    </Modal.Content>
-    </div> 
+          <Button
+            positive
+            icon='checkmark'
+            labelPosition='right'
+            content='Add New Task'
+            onClick={addNewTask} />
+        </div>
+      </Modal.Content>
+    </div>
   )
 }
 
 
-export default TaskModal
+export default TaskModal;
 
 
   // handleChange = (e, { value }) => this.setState({ value })

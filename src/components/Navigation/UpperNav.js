@@ -40,7 +40,7 @@ export default function NavBar(props) {
             <Modal size={'small'} open={openModal} onClose={close}>
               <TaskModal />
               <Modal.Actions>
-                <button negative onClick={close}>Cancel</button>
+                <Button negative onClick={close} className="cancelBtn">Cancel</Button>
               </Modal.Actions>
             </Modal>
             <div className="addTask">Add a TASK</div>
