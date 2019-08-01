@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
+import moment from "moment";
 
 export default function Home() {
   const [EverythingState, setEverythingState] = useState([]);
@@ -33,24 +34,16 @@ export default function Home() {
 
   return (
     <div>
-      <div className="home-list">
-        <div
-          className={
-            EverythingState.completed
-              ? "checkbox checked"
-              : "checkbox unchecked"
-          }
-        >
-          <i className="fas fa-check fa-sm" />
-        </div>
 
-        <h1> Hi!{person.username}, Here's your upcoming schedule... </h1>
-      <div>
+        <h1> Hi! {person.username}, Here's your upcoming schedule... </h1>
+      <ul>
         {EverythingState.map(task => (
-          <div>{task.title}</div>
+          <li>{task.title}</li>
+          // moment({task.schedule_at})
+          
+
         ))}
+      </ul>
       </div>
-      </div>
-    </div>
   );
 }
