@@ -3,6 +3,10 @@
 .app-container {
   text-align: center;
 
+  .gone {
+    display: none;
+  }
+
   .icon-btn {
     border: none;
     background: none;

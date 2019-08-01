@@ -12,6 +12,7 @@ export default function TaskDisplay() {
     const [subtasks, setSubtasks] = useState([]);
     const [task, setTask] = useState({})
     const [openModal, setOpen] = useState(false)
+    const [classes, setClasses] = useState({'addBtn': 'icon-btn', 'addForm': 'gone'});
 
     const show = () => setOpen(true);
     const close = () => setOpen(false)
@@ -30,12 +31,8 @@ export default function TaskDisplay() {
         return [...unsorted].sort(compareSubtasks);
     }
 
-    function addSubtask() { //TODO: Allow adding user-given items.
-        setSubtasks(sortedSubtasks([...subtasks, {
-            name: "example",
-            completed: false,
-            id: 778
-        }]));
+    function addSubtask(subtask) { //TODO: Allow adding user-given items.
+        setSubtasks(sortedSubtasks([...subtasks, subtask]));
     }
 
     const deleteSubtask = id => {
@@ -82,13 +79,18 @@ export default function TaskDisplay() {
             ))}</ul>
 
             <button
-                className="icon-btn"
-                onClick={addSubtask}
+                className={classes.addBtn}
+                onClick={() => setClasses({addBtn: 'gone', addForm: ''})}
             >
                 <i class='fas fa-plus fa-lg'></i>
             </button>
 
-            <TextForm fields={['']} submitText='ADD SUBTASK' />
+            <TextForm
+                fields={['name']}
+                submitText='ADD SUBTASK'
+                submitFun={addSubtask}
+                className={classes.addForm}
+            />
 
             {/* <form onSubmit={() => alert('add collaborator')}>
                 <label>
