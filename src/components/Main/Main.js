@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../Navigation/UpperNav';
 import AccordionExampleStandard from '../Navigation/SideNav';
 import Home from '../Home/Home';
+import { Redirect } from 'react-router-dom'
 
 import PrivateRoute from '../../utils/PrivateRoute';
 // import { TaskContext } from './contexts/TaskContext'
@@ -13,21 +14,38 @@ import './main.scss';
 import TaskDisplay from '../TaskDisplay/TaskDisplay';
 import CalendarDisplay from '../Calendar/Calendar'
 import Search from '../Search/Search'
+import AxiosWithAuth from '../../utils/AxiosWithAuth';
 
 
 
 export default function MainPage(props) {
   const [tasks, setTasks] = useState([])
-  const [filteredTasks, setFilteredTasks] = useState('')
+  const [filteredTasks, setFilteredTasks] = useState([])
+  const [searchTerm, setSearch] = useState('')
 
-  const submitSearch = (event) => {
+  const submitSearch = (event, searching) => {
     event.preventDefault()
-    const searchTerm = ''
-    const filtered = tasks.filter(task => task.title.includes(searchTerm))
-    setFilteredTasks(filtered)
-    console.log(filtered)
-    props.history.push('/search')
+    setSearch(searching) 
+    console.log('submitSearch: ', searchTerm)
   }
+
+  useEffect(() => {
+    AxiosWithAuth()
+      .get('https://wunderlist-be.herokuapp.com/api/v2/todos')
+      .then(response => {
+        setTasks(response.data)
+      })
+  }, [])
+
+  useEffect(() => {
+    console.log('these are the Tasks:', tasks)
+    setFilteredTasks(tasks.filter(task => task.title.includes(searchTerm)))
+  },[searchTerm])
+
+  useEffect(() => {
+    console.log(filteredTasks)
+  },[filteredTasks])
+
 
     return (
         <div>
@@ -41,7 +59,7 @@ export default function MainPage(props) {
                 {/* <PrivateRoute exact path='/create' component={(props) => <CreateTask />} /> */}
                 <PrivateRoute path='/task/:id' component={(props) => <TaskDisplay match={props.match} />} />
                 <PrivateRoute path='/calendar' component={CalendarDisplay} />
-                <PrivateRoute path='/search' component={(props) => <Search filteredTasks={filteredTasks} />} />
+                <PrivateRoute path='/search' component={(props) => <Search push={props.history} filteredTasks={filteredTasks} />} />
             </div>
           {/* </TaskContext.Provider> */}
         </div>

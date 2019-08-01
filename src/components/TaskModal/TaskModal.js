@@ -27,7 +27,7 @@ const TaskModal = (props) => {
     }
   },[])
 
-  console.log(props.task)
+  // console.log(props.task)
 
   const changeHandler = (event) => {
     setTask({ 

@@ -12,8 +12,9 @@ import TaskModal from '../TaskModal/TaskModal'
 export default function NavBar(props) {
   const [showSearch, setShowSearch] = useState(false);
   const [search, setSearch] = useState('')
+  const [filtered, setFiltered] = useState([])
   const [openModal, setOpen] =useState( false)
-  const [tasks, setTasks] = useState([])
+  // const [tasks, setTasks] = useState([])
 
   const handleChange = () => {
       setShowSearch(!showSearch);
@@ -23,29 +24,22 @@ export default function NavBar(props) {
     setSearch(event.target.value)
   }
 
-  useEffect(() => {
-    AxiosWithAuth()
-      .get('https://wunderlist-be.herokuapp.com/api/v2/todos')
-      .then(response => {
-        setTasks(response.data)
-      })
-      .catch(response => {
-        console.log(response)
-      });
-  }, [])
+  useEffect(()=> {
+    console.log('useEffect in Main', props.filteredTasks)
+  }, [props.filteredTasks])
 
-  console.log(search)
   console.log(props)
+  console.log(search)
 
   const show = () => setOpen( true );
   const close = () => setOpen(false)
 
   return (
     <div className="Nav">
-      <Link to="#" className="Search">
+      <div className="Search">
         <Input focus={showSearch} placeholder='Search...' name='search' value={search} onChange={searchHandler} />
-        <Icon className="searchIcon" name="search" size="large" onClick={props.submitSearch} />
-      </Link>
+        <Icon className="searchIcon" name="search" size="large" onClick={(event) => props.submitSearch(event, search)} />
+      </div>
         <div className="Navbar">
           <Link to="#" className="current">HOME</Link>
           <div className="addNav">
