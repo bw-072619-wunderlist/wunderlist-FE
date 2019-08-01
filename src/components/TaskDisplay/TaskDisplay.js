@@ -88,7 +88,7 @@ export default function TaskDisplay() {
                 <i class='fas fa-plus fa-lg'></i>
             </button>
 
-            <TextForm fields={['name', '', 'something']} />
+            <TextForm fields={['']} submitText='ADD SUBTASK' />
 
             {/* <form onSubmit={() => alert('add collaborator')}>
                 <label>

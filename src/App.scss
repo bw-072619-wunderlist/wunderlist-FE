@@ -18,6 +18,12 @@
     }
   }
 
+  .text-btn {
+    text-align: center;
+    background: white;
+    border: 1px solid $off-black;
+  }
+
   .checkbox {
     @extend .icon-btn;
     border: 2px solid $primary-light;
@@ -60,6 +66,19 @@
 
     > :last-child {
       margin: 0;
+    }
+  }
+
+  form {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 500px;
+
+    label {
+      display: flex;
+      flex-direction: row;
     }
   }
 

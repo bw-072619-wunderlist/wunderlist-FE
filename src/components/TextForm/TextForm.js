@@ -18,14 +18,14 @@ function Form({ submitFun, submitText, fields }) {
         <form onSubmit={add}>
             {vals && Object.keys(vals).map(field => (
                 <label>
-                    {vals[field] && <h2>{vals[field]}</h2>}
+                    {field && <p>{field}</p>}
                     <input type='text' id={field} value={vals[field]} onChange={inputHandler} />
                 </label>
             ))}
             <label>
 
             </label>
-            <input type='submit' value={submitText} />
+            <input className='text-btn' type='submit' value={submitText} />
         </form>
     );
 
