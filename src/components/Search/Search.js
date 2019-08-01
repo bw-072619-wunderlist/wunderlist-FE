@@ -11,7 +11,14 @@ const Search = ({ filteredTasks, query }) => {
       <div>
         <ul>
           {filteredTasks.map(task => (
-            <li><Link to={`task/${task.id}`}>{task.title}</Link></li>
+            <li className="fluid-list">
+              <button className={
+                task.completed ? 'checkbox checked' : 'checkbox unchecked'
+              }>
+                <i className='fas fa-check fa-sm'></i>
+              </button>
+              <Link to={`task/${task.id}`}>{task.title}</Link>
+            </li>
           ))}
         </ul>
       </div>
