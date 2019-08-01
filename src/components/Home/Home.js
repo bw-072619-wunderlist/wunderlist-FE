@@ -28,6 +28,9 @@ export default function Home() {
       });
   }, []);
 
+  const person = JSON.parse(localStorage.getItem('data'))
+  console.log(person) 
+
   return (
     <div>
       <div className="home-list">
@@ -41,7 +44,7 @@ export default function Home() {
           <i className="fas fa-check fa-sm" />
         </div>
 
-        <h1> Hi!{}, Here's your upcoming schedule... </h1>
+        <h1> Hi!{person.username}, Here's your upcoming schedule... </h1>
       <div>
         {EverythingState.map(task => (
           <div>{task.title}</div>
