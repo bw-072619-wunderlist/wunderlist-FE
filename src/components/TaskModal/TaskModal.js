@@ -17,7 +17,7 @@ const TaskModal = (props) => {
     scheduled_at: null,
   })
   const [radioStatus, setRadio] = useState('no_repeat')
-  
+
   useEffect(() => {
     if (props.task) {
       setTask({
@@ -45,14 +45,15 @@ const TaskModal = (props) => {
 
   const repeatHandler = (e, value) => {
     setRadio(value.value)
-  console.log(value)}
+    console.log(value)
+  }
 
-  useEffect(() =>{
+  useEffect(() => {
     setTask({
       ...taskState,
       repeat: radioStatus
     })
-  },[radioStatus])
+  }, [radioStatus])
 
   const addNewTask = event => {
     event.preventDefault();
@@ -84,73 +85,75 @@ const TaskModal = (props) => {
       <Modal.Description>
         <Header>Default Profile Image</Header>
       </Modal.Description> */}
-      <div className='task-form'>
-        <Form>
-          <Form.Field
-            label='Title'
-            name='title'
-            control={Input}
-            value={taskState.title}
-            onChange={changeHandler} />
+        <div className='task-form'>
+          <Form>
+            <Form.Field
+              label='Title'
+              name='title'
+              control={Input}
+              value={taskState.title}
+              onChange={changeHandler} />
 
-          <Form.Field 
-            label='Description'
-            control={TextArea}
-            name='description' 
-            value={taskState.description} 
-            onChange={changeHandler} />
-        <div className='date-div'>
+            <Form.Field
+              label='Description'
+              control={TextArea}
+              name='description'
+              value={taskState.description}
+              onChange={changeHandler} />
 
+            <div className='date-div'>
+              <DatePicker
+                selected={taskState.scheduled_at}
+                onChange={dateHandler}
+                name='scheduled_at'
+                showTimeSelect
+                timeFormat="HH:mm"
+                timeIntervals={15}
+                dateFormat="MMMM d, yyyy h:mm aa"
+                timeCaption="time" />
 
-          <DatePicker
-            selected={taskState.scheduled_at}
-            onChange={dateHandler}
-            name='scheduled_at'
-            showTimeSelect
-            timeFormat="HH:mm"
-            timeIntervals={15}
-            dateFormat="MMMM d, yyyy h:mm aa"
-            timeCaption="time" />
-        </div>
-          <Form.Field>
-            Selected value: <b>{radioStatus}</b>
-          </Form.Field>
-          <Form.Field>
-            <Radio
-              label='No repeat'
-              name='radioGroup'
-              value='no_repeat'
-              checked={radioStatus === 'no_repeat'}
-              onChange={repeatHandler}
-            />
-          </Form.Field>
-          <Form.Field>
-            <Radio
-              label='Daily'
-              name='radioGroup'
-              value='daily'
-              checked={radioStatus === 'daily'}
-              onChange={repeatHandler}
-            />
-          </Form.Field>
-          <Form.Field>
-            <Radio
-              label='Weekly'
-              name='radioGroup'
-              value='weekly'
-              checked={radioStatus === 'weekly'}
-              onChange={repeatHandler}
-            />
-          </Form.Field>
-          <Form.Field>
-            <Radio
-              label='Monthly'
-              name='radioGroup'
-              value='monthly'
-              checked={radioStatus === 'monthly'}
-              onChange={repeatHandler}
-            />
-          </Form.Field>
+              <Form.Field>
+                Selected value:<b>{radioStatus}</b>
+              </Form.Field>
+              <div className="radio-div">
+                <Form.Field>
+                  <Radio
+                    label='No repeat'
+                    name='radioGroup'
+                    value='no_repeat'
+                    checked={radioStatus === 'no_repeat'}
+                    onChange={repeatHandler}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <Radio
+                    label='Daily'
+                    name='radioGroup'
+                    value='daily'
+                    checked={radioStatus === 'daily'}
+                    onChange={repeatHandler}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <Radio
+                    label='Weekly'
+                    name='radioGroup'
+                    value='weekly'
+                    checked={radioStatus === 'weekly'}
+                    onChange={repeatHandler}
+                  />
+                </Form.Field>
+                <Form.Field>
+                  <Radio
+                    label='Monthly'
+                    name='radioGroup'
+                    value='monthly'
+                    checked={radioStatus === 'monthly'}
+                    onChange={repeatHandler}
+                  />
+                </Form.Field>
+              </div>
+            </div>
 
           </Form>
           <Button
@@ -169,7 +172,7 @@ const TaskModal = (props) => {
 export default TaskModal;
 
 
-  // handleChange = (e, { value }) => this.setState({ value })
+// handleChange = (e, { value }) => this.setState({ value })
 
 
 

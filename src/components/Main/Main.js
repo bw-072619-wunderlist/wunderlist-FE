@@ -14,7 +14,7 @@ import '../../App.scss';
 import './main.scss';
 
 import TaskDisplay from '../TaskDisplay/TaskDisplay';
-import CalendarDisplay from '../Calendar/Calendar'
+import CalendarDisplay from '../Calendar/Calendar';
 import Search from '../Search/Search'
 import AxiosWithAuth from '../../utils/AxiosWithAuth';
 
