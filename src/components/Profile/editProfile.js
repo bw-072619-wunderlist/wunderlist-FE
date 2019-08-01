@@ -5,6 +5,7 @@ import 'semantic-ui-css/semantic.min.css';
 import './editProfile.scss';
 
 import Login from '../Login/Login';
+import AxiosWithAuth from '../../utils/AxiosWithAuth';
 
 
 const EditProfile = (props) => {

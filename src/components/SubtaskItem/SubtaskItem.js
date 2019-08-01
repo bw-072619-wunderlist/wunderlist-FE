@@ -7,6 +7,7 @@ export default ({ completed, name, id }) => {
     name: name,
     completed: completed,
   })
+  const [userField, setUser] = useState('')
 
   const deleteSubTask = () => {
     console.log(id)
