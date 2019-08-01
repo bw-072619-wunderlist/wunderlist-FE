@@ -76,8 +76,6 @@ const MainPage = (props) => {
         <AccordionExampleStandard />
         {/* <Calendar /> */}
         <PrivateRoute exact path='/' component={(props) => <Home />} />
-        {/* <PrivateRoute exact path="/profile/edit" component={(props) => <EditProfile />} /> */}
-        {/* <PrivateRoute exact path='/create' component={(props) => <CreateTask />} /> */}
         <PrivateRoute path='/task/:id' component={(props) => <TaskDisplay match={props.match} />} />
         <PrivateRoute path='/calendar' component={CalendarDisplay} />
         <PrivateRoute path='/search' component={(props) => <Search filteredTasks={filteredTasks} />} />
