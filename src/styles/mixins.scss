@@ -24,3 +24,18 @@
     
   }
 }
+
+//// Button Mixins
+@mixin icon-btn() {
+  border: none;
+  background: none;
+  width: $small-btn;
+  height: $small-btn;
+
+  * {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

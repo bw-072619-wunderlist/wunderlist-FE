@@ -53,11 +53,11 @@ export default function TaskDisplay() {
     return (
         <div>
             <div className="fluid-list">
-                <div className={
+                <button className={
                     task.completed ? 'checkbox checked' : 'checkbox unchecked'
                 }>
                     <i className="fas fa-check fa-sm"></i>
-                </div>
+                </button>
                 <h1>hello world</h1>
                 <div onClick={show}>
                     <i class="fas fa-pencil-alt fa-lg"></i>
