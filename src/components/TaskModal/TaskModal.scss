@@ -1,0 +1,55 @@
+@import '../../../node_modules/semantic-ui-css/semantic.min.css';
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+
+.ui.active.modal {
+//   height: 420px;	
+//   width: 620px;	
+//   border: 1px solid #979797;	
+//   background-color: #FAFAFA;	
+    box-shadow: 0px 0px 12px 8px grey;
+    width: 620px;
+    display: flex;
+    flex-direction: column;
+    margin: auto 0;
+    background-color: $off-white;
+    border: 1px solid $primary-light;
+    // box-shadow: 0px 0px 6px 4px $primary-light;
+
+  .taskHeader {
+      color: #233A6D;
+      margin: 2rem auto;	
+      font-family: Lato;	
+      font-size: 20px;	
+      font-weight: 900;	
+      letter-spacing: 4.57px;	
+      line-height: 19px;	
+      text-align: center;
+  }
+
+  .ui.form .field > label {
+      width: 100px;
+      margin-right: 20px;
+  }
+
+  .dateDiv {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+  }
+  .ui.labeled.icon.button {
+        margin: 20px 0 20px 245px;
+    //   text-align: center;
+    //   background: $primary-light;
+        width: 140px;
+        background-color: $primary-color;
+        font-family: $primary-font;
+        color: $off-white;
+        font-size: 12px;
+        font-weight: normal;
+        letter-spacing: 1.2;
+  }
+  
+}

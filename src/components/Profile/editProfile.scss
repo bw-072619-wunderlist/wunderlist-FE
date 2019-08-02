@@ -1,0 +1,92 @@
+
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+.ui.modal>.header {
+       color: #243B6B;
+       font-family: Lato;
+       font-size: 16px;
+       font-weight: 900;
+       letter-spacing: 4.57px;
+       line-height: 19px;
+       text-align: center;
+};
+
+.ui.modal {
+      border: 1px solid #979797;	
+      background-color: #FAFAFA;	
+      box-shadow: 0 2px 20px 0 rgba(0,0,0,0.5);
+}
+
+.ui.modal>.image.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ui.modal>.content>.description {
+    text-align: center;
+}
+
+.ui.form .field {
+    display: flex;
+    flex-direction: row;
+    margin: 0 5rem 2rem 5rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ui.form .field > label {
+    // width: 15rem;
+    height: 20px;	
+    // width: 150px;
+    color: #233A6D;	
+    font-family: Lato;	
+    font-size: 16px;	
+    line-height: 20px;
+}
+
+.ui.form input:not([type]){
+    // width: 20rem;
+    height: 32px;	
+    width: 381px;	
+    border: 1px solid #979797;	
+    background-color: #FFFFFF;
+} 
+
+.ui.form .field>label {
+    // margin-right: 3rem;
+    // width: 20px;
+}
+
+.ui.button {
+    background: #50B83C;
+    margin: 2rem 0 2rem 0;
+    width: 10rem;
+    border-radius: 0;
+}
+
+.ui.header:last-child {
+    text-decoration: underline;
+    margin: 0;
+    color: #233A6D;
+    font-family: Avenir;
+    font-size: 16px;
+    font-weight: 900;
+    line-height: 22px;
+    text-align: center;
+}
+
+
+.ui.image img {
+    margin-bottom: 1rem;
+}
+
+.ui.modal>.content>.image+.description {
+    padding: 0;
+}
+
+.buttonDiv {
+    display: flex;
+    justify-content: center;
+}
+

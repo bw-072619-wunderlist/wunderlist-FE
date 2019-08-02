@@ -1,0 +1,10 @@
+
+.mainPage {
+    display: flex;
+    flex-direction: row;
+
+    >:last-child {
+        flex-grow: 1;
+    }
+}
+

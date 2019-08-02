@@ -1,15 +1,137 @@
+@import './styles/mixins.scss';
+
 .app-container {
   text-align: center;
 
-  .app-header {
-    background-color: #282c34;
-    min-height: 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+  .gone {
+    display: none;
   }
 
+  .icon-btn {
+    border: none;
+    background: none;
+    width: $small-btn;
+    height: $small-btn;
+    color: $off-black;
+  
+    * {
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .text-btn {
+    text-align: center;
+    background: white;
+    border: 1px solid $off-black;
+  }
+
+  .checkbox {
+    @extend .icon-btn;
+    border: 2px solid $primary-light;
+    border-radius: 8.5px;
+    // //kept for backward compatibility (remove later):
+    // font-size: 1rem;
+    // text-align: center;
+    // width: $small-btn;
+    // height: $small-btn;
+
+    // * {
+    //   margin: auto;
+    // }
+    &.unchecked {
+      background-color: white;
+  
+      * {
+        visibility: hidden;
+      }
+    }
+  
+    &.checked {
+      background-color: $primary-light;
+    }
+  }
+
+  .fluid-list {
+    max-width: 700px;
+    margin: 32px auto;
+    display: flex;
+    flex-direction: row;
+
+    h1, h2, h3, h4, h5, h6, p {
+      flex: 1;
+    }
+
+    * {
+      margin: 0 16px 0 0;
+    }
+
+    > :last-child {
+      margin: 0;
+    }
+  }
+
+  form {
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 500px;
+
+    label {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+
+  ul {
+    max-width: 500px;
+    margin: auto;
+    font-size: 16px;
+    font-family: 'Lato';
+
+    li {
+      display: flex;
+      align-items: center;
+      height: 24px;
+      margin: 19px 0;
+
+      > * {
+        margin: 0 16px 0 0;
+        color: $accent-dark;
+      }
+  
+      > :last-child {
+        margin: 0;
+      }
+
+      p {
+        flex: 1;
+        text-align: left;
+      }
+
+      .cal-icon {
+        color: $accent-light;
+      }
+
+      // .del-icon {
+      //   @extend .icon-btn;
+      //   color: $off-black;
+      // }
+    }
+  }
+}
+
+.HomeList {
+  max-width: 700px;
+  margin-top: 32px;
+  color: #243b6b;
+  font-family: "Lato";
+  font-weight: 500px;
+}
+
+.HomeList h2 {
+  font-weight: bold;
 }

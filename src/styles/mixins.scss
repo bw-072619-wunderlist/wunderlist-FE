@@ -1,0 +1,41 @@
+@import './variables.scss';
+
+//// UX Font mixins
+@mixin link-text() {
+  font-family: $primary-font;
+  font-size: 10pt;
+  color: $accent-dark;
+  text-decoration: underline;
+}
+
+@mixin regular-text() {
+  font-family: $primary-font;
+  font-size: 16pt;
+  color: $accent-dark;
+  text-decoration: none;
+}
+
+@mixin light-text() {
+  font-family: $primary-font;
+  font-size: 16pt;
+  color: $accent-light;
+  text-decoration: none;
+  .checked {
+    
+  }
+}
+
+//// Button Mixins
+// @mixin icon-btn() {
+//   border: none;
+//   background: none;
+//   width: $small-btn;
+//   height: $small-btn;
+
+//   * {
+//     margin: auto;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//   }
+// }
