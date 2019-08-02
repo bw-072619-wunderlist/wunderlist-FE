@@ -10,6 +10,8 @@ import TextForm from '../TextForm/TextForm';
 
 export default function TaskDisplay({ match }) {
     const [subtasks, setSubtasks] = useState([]);
+    const [moribund, setMoribund] = useState(null);
+    const [newSubtask, setNewSubtask] = useState(null);
     const [task, setTask] = useState({})
     const [openModal, setOpen] = useState(false)
     const [classes, setClasses] = useState({ 'addBtn': 'icon-btn', 'addForm': 'gone' });
@@ -32,24 +34,20 @@ export default function TaskDisplay({ match }) {
     }
 
     function addSubtask(subtask) {
-        setSubtasks(sortedSubtasks([...subtasks, subtask]));
+        setNewSubtask(subtask);
         setClasses({ 'addBtn': 'icon-btn', 'addForm': 'gone' });
     }
 
     function deleteSubtask(id) {
-        console.log(id)
-        AxiosWithAuth()
-            .delete(`https://wunderlist-be.herokuapp.com/api/v2/tasks/${id}`)
-            .then(response => {
-                console.log(response)
-            })
-            .catch(response => {
-                console.log(response)
-            })
+        console.log('id', id)
+        console.log('subtasks', subtasks)
+        setMoribund(id);
+        setSubtasks(subtasks.filter(subtask => subtask.id !== id));
+        console.log('after', subtasks.filter(subtask => subtask.id !== id))
     }
 
     function toggleChecked() {
-        setTask({...task, completed: !task.completed});
+        setTask({ ...task, completed: !task.completed });
     }
 
     useEffect(() => {
@@ -65,6 +63,27 @@ export default function TaskDisplay({ match }) {
             });
     }, []);
 
+    useEffect(() => {
+        console.log('add new subtask to back-end with axios somehow')
+        console.log('subtasks length', subtasks.length)
+        if (newSubtask) {
+            setSubtasks(sortedSubtasks([...subtasks, {...newSubtask, id: subtasks.length}]));
+        }
+    }, [newSubtask])
+
+    useEffect(() => {
+        if (moribund) {
+            AxiosWithAuth()
+                .delete(`https://wunderlist-be.herokuapp.com/api/v2/tasks/${moribund}`)
+                .then(response => {
+                    console.log(response)
+                })
+                .catch(response => {
+                    console.log(response)
+                })
+        }
+    }, [moribund]);
+
     return (
         <div>
             <div className='fluid-list'>
@@ -75,7 +94,7 @@ export default function TaskDisplay({ match }) {
                 >
                     <i className='fas fa-check fa-sm'></i>
                 </button>
-                <h1>hello world</h1>
+                <h1>{task.title}</h1>
                 <div onClick={show}>
                     <i class='fas fa-pencil-alt fa-lg'></i>
                 </div>
