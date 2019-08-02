@@ -33,12 +33,16 @@ export default function Home() {
   console.log(person) 
 
   return (
-    <div>
+    <div className = "HomeList">
 
-        <h2> Hi! {person.username}, Here's your upcoming schedule... </h2>
+        <h2> Hi {person.username}! Here's your upcoming schedule... </h2>
       <ul>
         {EverythingState.map(task => (
-<li><input className ="checkbox" type="checkbox" checked={task.completed} /> {task.title} 
+<li><button className={
+                    task.completed ? 'checkbox checked' : 'checkbox unchecked'
+                }>
+                    <i className='fas fa-check fa-sm'></i>
+                </button> {task.completed}{task.title} 
 <li>{moment(task.scheduled_at).format("MMM Do YY")}</li> </li>
           
           
