@@ -32,12 +32,24 @@ const Home = () => {
       });
   }, []);
 
+  const deleteTask = (id) => {
+    console.log(id)
+    AxiosWithAuth()
+      .delete(`https://wunderlist-be.herokuapp.com/api/v2/todos/${id}`)
+      .then(response => {
+        console.log(response)
+      })
+      .catch(response => {
+        console.log(response)
+      })
+  }
+
   return (
     <div>
       <h1> Hi {userData.username}! Here's your upcoming schedule... </h1>
       <ul>
         {sorted.map(task => (
-          <><HomeTasks task={task} /></>
+          <><HomeTasks task={task} deleteTask={deleteTask} /></>
         ))}
       </ul>
     </div>

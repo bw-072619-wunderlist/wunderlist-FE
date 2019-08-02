@@ -31,7 +31,7 @@ export default ({ completed, name, id, delFunc }) => {
 
   return (
     <li>
-      <button onClick={toggleSubTask} className={
+      <button  className={
         subtask.completed ? 'checkbox checked' : 'checkbox unchecked'
       }><i className="fas fa-check fa-sm"></i></button>
       <p>{subtask.name}</p>
