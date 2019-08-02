@@ -12,9 +12,16 @@ import TextForm from '../TextForm/TextForm';
 
 
 ///// Notes for Catherine
-// In order to hit the correct param.id you need to do it a bit different for a route component
+// In order to hit the correct url id you need to do it a bit different for a route component
 // aka we're using match.params.id to receive the url id. Console.log ( match ) and see what all is in there
 // https://reacttraining.com/react-router/web/api/Route/component
+
+// Check the console log of newSubtask, that's exactly what you need to be sending over! No need to try to drill into it.
+// The route is expecting an object. aka {name: 'imma subtaskerino'}. It needs to know what key to assign the value you are giving it. :)
+
+// Imma be honest. that is the best death state so far. I approve. (although not exactly what I would call semantic code ;) )
+// That filter + delete may be a bit of overkill. I get what you're going for, but I'm not sure if
+// that'll do exactly what you expect. Or help make transitions smooth
 
 export default function TaskDisplay({ match }) {
     const [subtasks, setSubtasks] = useState([]);
