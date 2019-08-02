@@ -30,14 +30,17 @@ export default function TaskDisplay({ match }) {
     const [task, setTask] = useState({})
     const [id, setID] = useState(match.params.id)
     const [openModal, setOpen] = useState(false)
-    const [classes, setClasses] = useState({ 'addBtn': 'icon-btn', 'addForm': 'gone' });
+    const [classes, setClasses] = useState(
+        {
+            'addBtn': 'icon-btn',
+            'addForm': 'gone'
+        });
     const [users, setUsers] = useState([])
-    const [newUser, setNewUser] = useState('')
+    // const [newUser, setNewUser] = useState('')
 
     const show = () => setOpen(true);
     const close = () => setOpen(false)
 
-    console.log('props.match', match.params.id )
     const parsedID = parseInt(match.params.id)
 
     function sortedSubtasks(unsorted) {
@@ -56,52 +59,53 @@ export default function TaskDisplay({ match }) {
 
     function addSubtask(subtask) {
         setNewSubtask(subtask);
-        setClasses({ 'addBtn': 'icon-btn', 'addForm': 'gone' });
+        setClasses({ ...classes, addBtn: 'icon-btn', addForm: 'gone' });
     }
 
     function deleteSubtask(id) {
-        console.log('id', id)
-        console.log('subtasks', subtasks)
         setMoribund(id);
-        setSubtasks(subtasks.filter(subtask => subtask.id !== id));
-        console.log('after', subtasks.filter(subtask => subtask.id !== id))
+        // setSubtasks(subtasks.filter(subtask => subtask.id !== id));
     }
 
     function toggleChecked() {
         setTask({ ...task, completed: !task.completed });
     }
-    const userHandler = (event) => {
-      setNewUser(event.target.value)
+
+    function newCollaborator({ name }) {
+        // alert(['add collaborator', name].join(': '));
+        setTask({...task, shares: [...task.shares, users.find(usr => usr.username === name)]})
     }
+
+    // const userHandler = (event) => {
+    //   setNewUser(event.target.value)
+    // }
 
     useEffect(() => {
       AxiosWithAuth()
         .get('https://wunderlist-be.herokuapp.com/api/v2/users')
         .then(response => {
           setUsers(response.data)
+          console.log('users', response)
         })
         .catch(response => {
           console.log(response)
         })
     }, [])
-    console.log(users)
+
+    // useEffect(() => {
+    //     AxiosWithAuth()
+    //         .get(`https://wunderlist-be.herokuapp.com/api/v2/todos/${id}`)
+    //         .then(res => {
+    //             setSubtasks(sortedSubtasks(res.data.tasks));
+    //             console.log('response: task', res.data)
+    //             setTask(res.data)
+    //         })
+    //         .catch(error => {
+    //             console.log('task error', error)
+    //         });
+    // }, []);
 
     useEffect(() => {
-        AxiosWithAuth()
-            .get(`https://wunderlist-be.herokuapp.com/api/v2/todos/${id}`)
-            .then(res => {
-                setSubtasks(sortedSubtasks(res.data.tasks));
-                console.log('response: task', res.data)
-                setTask(res.data)
-            })
-            .catch(error => {
-                console.log('task error', error)
-            });
-    }, []);
-
-    useEffect(() => {
-        console.log('subtasks length', subtasks.length)
-        console.log('this is newSubtask', newSubtask)
         if (newSubtask) {
             AxiosWithAuth()
                 .post(`https://wunderlist-be.herokuapp.com/api/v2/todos/${parsedID}/tasks`, [newSubtask])
@@ -116,15 +120,27 @@ export default function TaskDisplay({ match }) {
     }, [newSubtask])
 
     useEffect(() => {
-        if (moribund) {
+        if (moribund !== null) {
             AxiosWithAuth()
                 .delete(`https://wunderlist-be.herokuapp.com/api/v2/tasks/${moribund}`)
                 .then(response => {
-                    console.log(response)
+                    console.log('deleted', response)
                 })
                 .catch(response => {
-                    console.log(response)
+                    console.log('delete failed', response)
                 })
+            setMoribund(null);
+        } else {
+            AxiosWithAuth()
+            .get(`https://wunderlist-be.herokuapp.com/api/v2/todos/${id}`)
+            .then(res => {
+                setSubtasks(sortedSubtasks(res.data.tasks));
+                console.log('get task data', res.data)
+                setTask(res.data)
+            })
+            .catch(error => {
+                console.log('failed get task data', error)
+            });
         }
     }, [moribund]);
 
@@ -150,7 +166,7 @@ export default function TaskDisplay({ match }) {
 
             <button
                 className={classes.addBtn}
-                onClick={() => setClasses({ addBtn: 'gone', addForm: '' })}
+                onClick={() => setClasses({ ...classes, addBtn: 'gone', addForm: '' })}
             >
                 <i class='fas fa-plus fa-lg'></i>
             </button>
@@ -175,7 +191,24 @@ export default function TaskDisplay({ match }) {
 
             <h2>!!current collaborator!!</h2>
             {/* This will need to be an if statement that checks to see if task.share has something in it
-            if it does, display those users, if not show that no users have been added. */} 
+            if it does, display those users, if not show that no users have been added. */}
+
+            <h2>Add Collaborator:</h2>
+
+            <TextForm
+                fields={['name']}
+                submitText='ADD'
+                submitFun={newCollaborator}
+            />
+
+            <h2>Current Collaborators:</h2>
+
+            <ul>
+                {task.shares && users !== undefined ? task.shares.map(usrId => (
+                    <li>{users.find(usr => usr.id === usrId).username}</li>
+                )) : <li>None</li>}
+            </ul>
+            
 
             <Modal size={'small'} open={openModal} onClose={close}>
                 <EditModal task={task} id={id} />

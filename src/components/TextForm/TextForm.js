@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
-function Form({ submitFun, submitText, fields, labels=[], className }) {
+function Form({ submitFun, submitText, fields, labels = [], className }) {
     const deflt = Object.fromEntries(fields.map(field => [field, '']));
     const [vals, setVals] = useState(deflt);
 
     function inputHandler({ target }) {
-        setVals({...vals, [target.id]: target.value});
+        setVals({ ...vals, [target.id]: target.value });
     }
 
     function add(ev) {
@@ -19,7 +19,12 @@ function Form({ submitFun, submitText, fields, labels=[], className }) {
             {vals && fields.map((field, ix) => (
                 <label>
                     {labels[ix] && <p>{labels[ix]}</p>}
-                    <input type='text' id={field} value={vals[field]} onChange={inputHandler} />
+                    <input
+                        type='text'
+                        id={field}
+                        value={vals[field]}
+                        onChange={inputHandler}
+                    />
                 </label>
             ))}
             <label>
