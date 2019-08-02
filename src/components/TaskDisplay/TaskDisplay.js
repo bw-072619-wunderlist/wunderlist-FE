@@ -8,18 +8,27 @@ import TaskModal from '../TaskModal/TaskModal';
 import SubtaskItem from '../SubtaskItem/SubtaskItem';
 import TextForm from '../TextForm/TextForm';
 
-import Testing from '../../testing/testing';
+// import Testing from '../../testing/testing';
+
+
+///// Notes for Catherine
+// In order to hit the correct param.id you need to do it a bit different for a route component
+// aka we're using match.params.id to receive the url id. Console.log ( match ) and see what all is in there
+// https://reacttraining.com/react-router/web/api/Route/component
 
 export default function TaskDisplay({ match }) {
     const [subtasks, setSubtasks] = useState([]);
     const [moribund, setMoribund] = useState(null);
     const [newSubtask, setNewSubtask] = useState(null);
     const [task, setTask] = useState({})
+    const [id, setID] = useState(match.params.id)
     const [openModal, setOpen] = useState(false)
     const [classes, setClasses] = useState({ 'addBtn': 'icon-btn', 'addForm': 'gone' });
 
     const show = () => setOpen(true);
     const close = () => setOpen(false)
+
+    console.log('props.match', match.params.id )
 
     function sortedSubtasks(unsorted) {
         function compareSubtasks(a, b) {
@@ -54,7 +63,7 @@ export default function TaskDisplay({ match }) {
 
     useEffect(() => {
         AxiosWithAuth()
-            .get(`https://wunderlist-be.herokuapp.com/api/v2/todos/${match.id}`)
+            .get(`https://wunderlist-be.herokuapp.com/api/v2/todos/${id}`)
             .then(res => {
                 setSubtasks(sortedSubtasks(res.data.tasks));
                 console.log('response: task', res.data)
@@ -67,9 +76,10 @@ export default function TaskDisplay({ match }) {
 
     useEffect(() => {
         console.log('subtasks length', subtasks.length)
+        console.log('this is newSubtask', newSubtask)
         if (newSubtask) {
             AxiosWithAuth()
-                .post(`https://wunderlist-be.herokuapp.com/api/v2/todos/${match.id}/tasks`, newSubtask.name)
+                .post(`https://wunderlist-be.herokuapp.com/api/v2/todos/${match.params.id}/tasks`, newSubtask)
                 .then(response => {
                     console.log(response.data)
                 })
@@ -95,7 +105,6 @@ export default function TaskDisplay({ match }) {
 
     return (
         <div>
-            <Testing />
             <div className='fluid-list'>
                 <button
                     onClick={toggleChecked}
