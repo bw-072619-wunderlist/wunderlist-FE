@@ -8,7 +8,7 @@ import TaskModal from '../TaskModal/TaskModal';
 import SubtaskItem from '../SubtaskItem/SubtaskItem';
 import TextForm from '../TextForm/TextForm';
 
-export default function TaskDisplay() {
+export default function TaskDisplay({ match }) {
     const [subtasks, setSubtasks] = useState([]);
     const [task, setTask] = useState({})
     const [openModal, setOpen] = useState(false)
@@ -49,7 +49,7 @@ export default function TaskDisplay() {
 
     useEffect(() => {
         AxiosWithAuth()
-            .get(`https://wunderlist-be.herokuapp.com/api/v2/todos/2`)
+            .get(`https://wunderlist-be.herokuapp.com/api/v2/todos/${match.id}`)
             .then(res => {
                 setSubtasks(sortedSubtasks(res.data.tasks));
                 console.log(res.data)
