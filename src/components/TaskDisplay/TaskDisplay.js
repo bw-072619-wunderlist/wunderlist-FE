@@ -118,13 +118,14 @@ export default function TaskDisplay({ match }) {
             setSubtasks(sortedSubtasks([...subtasks, { ...newSubtask, id: subtasks.length }]));
         }
     }, [newSubtask])
-
+    console.log(subtasks)
     useEffect(() => {
         if (moribund !== null) {
             AxiosWithAuth()
                 .delete(`https://wunderlist-be.herokuapp.com/api/v2/tasks/${moribund}`)
                 .then(response => {
                     console.log('deleted', response)
+                    setSubtasks(subtasks.filter(subtask => subtask.id !== moribund));
                 })
                 .catch(response => {
                     console.log('delete failed', response)
