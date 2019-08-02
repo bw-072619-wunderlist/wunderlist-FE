@@ -29,6 +29,21 @@
     border-radius: 8.5px;
   }
 
+  .add-btn {
+    margin: auto;
+    height: 56px;
+    width: 56px;
+    background-color: #243B6B;
+    box-shadow: 0 6px 24px 0 rgba(36,59,107,0.43);
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border: none;
+    border-radius: 50%;
+  }
+
   .checkbox {
     @extend .icon-btn;
     border: 2px solid $primary-light;
