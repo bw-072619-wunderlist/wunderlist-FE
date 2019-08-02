@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
-function Form({ submitFun, submitText, fields, className }) {
+function Form({ submitFun, submitText, fields, labels=[], className }) {
     const deflt = Object.fromEntries(fields.map(field => [field, '']));
     const [vals, setVals] = useState(deflt);
 
@@ -16,9 +16,9 @@ function Form({ submitFun, submitText, fields, className }) {
 
     return (
         <form onSubmit={add} className={className}>
-            {vals && Object.keys(vals).map(field => (
+            {vals && fields.map((field, ix) => (
                 <label>
-                    {field && <p>{field}</p>}
+                    {labels[ix] && <p>{labels[ix]}</p>}
                     <input type='text' id={field} value={vals[field]} onChange={inputHandler} />
                 </label>
             ))}

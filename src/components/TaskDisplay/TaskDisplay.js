@@ -8,11 +8,15 @@ import TaskModal from '../TaskModal/TaskModal';
 import SubtaskItem from '../SubtaskItem/SubtaskItem';
 import TextForm from '../TextForm/TextForm';
 
-export default function TaskDisplay() {
+import Testing from '../../testing/testing';
+
+export default function TaskDisplay({ match }) {
     const [subtasks, setSubtasks] = useState([]);
+    const [moribund, setMoribund] = useState(null);
+    const [newSubtask, setNewSubtask] = useState(null);
     const [task, setTask] = useState({})
     const [openModal, setOpen] = useState(false)
-    const [classes, setClasses] = useState({'addBtn': 'icon-btn', 'addForm': 'gone'});
+    const [classes, setClasses] = useState({ 'addBtn': 'icon-btn', 'addForm': 'gone' });
 
     const show = () => setOpen(true);
     const close = () => setOpen(false)
@@ -31,44 +35,76 @@ export default function TaskDisplay() {
         return [...unsorted].sort(compareSubtasks);
     }
 
-    function addSubtask(subtask) { //TODO: Allow adding user-given items.
-        setSubtasks(sortedSubtasks([...subtasks, subtask]));
+    function addSubtask(subtask) {
+        setNewSubtask(subtask);
+        setClasses({ 'addBtn': 'icon-btn', 'addForm': 'gone' });
     }
 
-    const deleteSubtask = id => {
-        console.log(id)
-        AxiosWithAuth()
-          .delete(`https://wunderlist-be.herokuapp.com/api/v2/tasks/${id}`)
-          .then(response => {
-            console.log(response)
-          })
-          .catch(response => {
-            console.log(response)
-          })
-      }
+    function deleteSubtask(id) {
+        console.log('id', id)
+        console.log('subtasks', subtasks)
+        setMoribund(id);
+        setSubtasks(subtasks.filter(subtask => subtask.id !== id));
+        console.log('after', subtasks.filter(subtask => subtask.id !== id))
+    }
+
+    function toggleChecked() {
+        setTask({ ...task, completed: !task.completed });
+    }
 
     useEffect(() => {
         AxiosWithAuth()
-            .get(`https://wunderlist-be.herokuapp.com/api/v2/todos/2`)
+            .get(`https://wunderlist-be.herokuapp.com/api/v2/todos/${match.id}`)
             .then(res => {
                 setSubtasks(sortedSubtasks(res.data.tasks));
-                console.log(res.data)
+                console.log('response: task', res.data)
                 setTask(res.data)
             })
             .catch(error => {
-                console.log(error)
+                console.log('task error', error)
             });
     }, []);
 
+    useEffect(() => {
+        console.log('subtasks length', subtasks.length)
+        if (newSubtask) {
+            AxiosWithAuth()
+                .post(`https://wunderlist-be.herokuapp.com/api/v2/todos/${match.id}/tasks`, newSubtask.name)
+                .then(response => {
+                    console.log(response.data)
+                })
+                .catch(response => {
+                    console.log(response)
+                })
+            setSubtasks(sortedSubtasks([...subtasks, { ...newSubtask, id: subtasks.length }]));
+        }
+    }, [newSubtask])
+
+    useEffect(() => {
+        if (moribund) {
+            AxiosWithAuth()
+                .delete(`https://wunderlist-be.herokuapp.com/api/v2/tasks/${moribund}`)
+                .then(response => {
+                    console.log(response)
+                })
+                .catch(response => {
+                    console.log(response)
+                })
+        }
+    }, [moribund]);
+
     return (
         <div>
+            <Testing />
             <div className='fluid-list'>
-                <button className={
-                    task.completed ? 'checkbox checked' : 'checkbox unchecked'
-                }>
+                <button
+                    onClick={toggleChecked}
+                    className={
+                        task.completed ? 'checkbox checked' : 'checkbox unchecked'}
+                >
                     <i className='fas fa-check fa-sm'></i>
                 </button>
-                <h1>hello world</h1>
+                <h1>{task.title}</h1>
                 <div onClick={show}>
                     <i class='fas fa-pencil-alt fa-lg'></i>
                 </div>
@@ -80,7 +116,7 @@ export default function TaskDisplay() {
 
             <button
                 className={classes.addBtn}
-                onClick={() => setClasses({addBtn: 'gone', addForm: ''})}
+                onClick={() => setClasses({ addBtn: 'gone', addForm: '' })}
             >
                 <i class='fas fa-plus fa-lg'></i>
             </button>
