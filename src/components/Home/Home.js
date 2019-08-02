@@ -44,6 +44,11 @@ const Home = () => {
       })
   }
 
+
+  //// TO DO FANCY DATE DISPLAY WITH TASKS
+    // Yeah the difficult part was mapping over all of them, and giving them headers by only the date within the map
+    // So probably an if statement in the map that's if (I'm the same date as before, add {basic task} else {nice header with date + basic task}
+
   return (
     <div>
       <h1> Hi {userData.username}! Here's your upcoming schedule... </h1>
@@ -57,3 +62,4 @@ const Home = () => {
 }
 
 export default Home
+

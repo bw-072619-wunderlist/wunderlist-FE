@@ -6,6 +6,8 @@ const Testing = () => {
   const oldPerson = JSON.parse(localStorage.getItem('data'))
   console.log(oldPerson)
 
+  console.log(new Date("2019-08-18T20:30:00.000Z"))
+
     useEffect(() => {
         AxiosWithAuth()
             .get('https://wunderlist-be.herokuapp.com/api/v2/todos')

@@ -4,7 +4,7 @@ import 'semantic-ui-css/semantic.min.css';
 
 import AxiosWithAuth from '../../utils/AxiosWithAuth';
 
-import TaskModal from '../TaskModal/TaskModal';
+import EditModal from '../TaskModal/EditModal';
 import SubtaskItem from '../SubtaskItem/SubtaskItem';
 import TextForm from '../TextForm/TextForm';
 
@@ -154,7 +154,7 @@ export default function TaskDisplay({ match }) {
             <h2>!!current collaborator!!</h2> */}
 
             <Modal size={'small'} open={openModal} onClose={close}>
-                <TaskModal task={task} />
+                <EditModal task={task} id={id} />
                 <Modal.Actions>
                     <button negative onClick={close}>Cancel</button>
                 </Modal.Actions>

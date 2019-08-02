@@ -15,7 +15,6 @@ export default ({ completed, name, id, delFunc }) => {
       completed: !subtask.completed
     })
     console.log('toggleSubTask')
-
   }
 
   useEffect(() => {

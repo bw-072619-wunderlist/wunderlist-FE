@@ -9,41 +9,36 @@ import 'semantic-ui-css/semantic.min.css';
 import "react-datepicker/dist/react-datepicker.css";
 import "./TaskModal.scss";
 
-const TaskModal = (props) => {
-  const [newTask, setNewTask] = useState({
-    title: '',
-    description: '',
-    repeat: 'no-repeat',
-    scheduled_at: null,
+const EditModal = (props) => {
+  console.log(props)
+  const [oldTask, setOldTask] = useState({
+    title: props.task.title,
+    description: props.task.description,
+    completed: props.task.completed,
+    repeat: props.task.repeat,
+    deleted: props.task.deleted,
+    // scheduled_at: props.task.scheduled_at
   })
-  
 
+  const parsedInt = parseInt(props.id)
+  console.log(parsedInt)
 
-  const [radioStatus, setRadio] = useState('no_repeat')
-
-  useEffect(() => {
-    if (props.task) {
-      setNewTask({
-        title: props.task.title,
-        description: props.task.description,
-        repeat: props.task.repeat,
-        scheduled_at: props.task.scheduled_at
-      })
-    }
-  }, [])
-
-  console.log(newTask)
+  const submitTask = {
+    ...oldTask,
+    scheduled_at: props.task.scheduled_at
+  }
+  const [radioStatus, setRadio] = useState(oldTask.repeat)
 
   const changeHandler = (event) => {
-    setNewTask({
-      ...newTask,
+    setOldTask({
+      ...oldTask,
       [event.target.name]: event.target.value
     })
   }
 
   const dateHandler = date => {
-    setNewTask({ ...newTask, scheduled_at: date })
-    console.log(newTask)
+    setOldTask({ ...oldTask, scheduled_at: date })
+    console.log(oldTask)
   }
 
   const repeatHandler = (e, value) => {
@@ -52,20 +47,20 @@ const TaskModal = (props) => {
   }
 
   useEffect(() => {
-    setNewTask({
-      ...newTask,
+    setOldTask({
+      ...oldTask,
       repeat: radioStatus
     })
   }, [radioStatus])
 
   const addNewTask = event => {
     event.preventDefault();
-    console.log(newTask)
+    console.log(oldTask)
     // setLoading(true)
     // console.log(loading)
     // console.log(login)
     AxiosWithAuth()
-      .post('https://wunderlist-be.herokuapp.com/api/v2/todos', newTask)
+      .put(`https://wunderlist-be.herokuapp.com/api/v2/todos/${props.id}`, submitTask)
       .then(response => {
         console.log(response)
       })
@@ -74,39 +69,31 @@ const TaskModal = (props) => {
       })
   }
 
-  const editTask = event => {
-    event.preventDefault()
-
-  }
+  if (oldTask.title)
 
   return (
     <div>
       <Modal.Header className="taskHeader">New Task</Modal.Header>
       <Modal.Content>
-        {/* In case I want to do a description instead of a header
-      
-      <Modal.Description>
-        <Header>Default Profile Image</Header>
-      </Modal.Description> */}
         <div className='task-form'>
           <Form>
             <Form.Field
               label='Title'
               name='title'
               control={Input}
-              value={newTask.title}
+              value={oldTask.title}
               onChange={changeHandler} />
 
             <Form.Field
               label='Description'
               control={TextArea}
               name='description'
-              value={newTask.description}
+              value={oldTask.description}
               onChange={changeHandler} />
 
             <div className='date-div'>
               <DatePicker
-                selected={newTask.scheduled_at}
+                selected={oldTask.scheduled_at}
                 onChange={dateHandler}
                 name='scheduled_at'
                 showTimeSelect
@@ -172,7 +159,7 @@ const TaskModal = (props) => {
 }
 
 
-export default TaskModal;
+export default EditModal;
 
 
 // handleChange = (e, { value }) => this.setState({ value })
@@ -224,11 +211,11 @@ const categoryOptions = _.map(categoryDefinitions, (category, index) => ({
 
             {/* <Dropdown
             placeholder='Repeat Task?'
-            selection={newTask.repeat}
+            selection={oldTask.repeat}
             onChange={repeatHandler}
             options={repeatOptions} />
             <Dropdown 
-              name={newTask.repeat}
+              name={oldTask.repeat}
               placeholder='Repeat Task?' 
               value={repeatOptions.text}
               selection 
