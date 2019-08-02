@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Switch } from 'react-router-dom'
+import { Switch, Redirect } from 'react-router-dom'
 import Navbar from '../Navigation/UpperNav';
 import AccordionExampleStandard from '../Navigation/SideNav';
 import Home from '../Home/Home';
@@ -13,6 +13,7 @@ import PrivateRoute from '../../utils/PrivateRoute';
 import '../../App.scss';
 import './main.scss';
 
+import Login from '../Login/Login'
 import TaskDisplay from '../TaskDisplay/TaskDisplay';
 import CalendarDisplay from '../Calendar/Calendar';
 import Search from '../Search/Search'
@@ -67,7 +68,7 @@ const MainPage = (props) => {
           )}
         />
         <PrivateRoute
-          path='/home'
+          path='/'
           component={props => (
             <Navbar submitSearch={submitSearch} header='HOME' />
           )}
@@ -76,7 +77,7 @@ const MainPage = (props) => {
       <div className="mainPage">
         <AccordionExampleStandard />
         {/* <Calendar /> */}
-        <PrivateRoute exact path='/home' component={(props) => <Home props={props} />} />
+        <PrivateRoute exact path='/' component={(props) => <Home props={props} />} />
         <PrivateRoute exact path='/task/:id' component={(props) => <TaskDisplay match={props.match} />} />
         <PrivateRoute exact path='/calendar' component={CalendarDisplay} />
         <PrivateRoute exact path='/search' component={(props) => <Search filteredTasks={filteredTasks} setFilteredTasks={setFilteredTasks} />} />

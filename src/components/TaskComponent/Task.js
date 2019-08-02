@@ -42,7 +42,8 @@ const HomeTasks = (props) => {
   },[updateTask])
 
   return(
-    <li>
+    
+      <li>
       <button onClick={toggleTask} className={
         task.completed ? 'checkbox checked' : 'checkbox unchecked'
       }><i className="fas fa-check fa-sm"></i></button>
@@ -51,6 +52,7 @@ const HomeTasks = (props) => {
         <i className="fas fa-times fa-lg"></i>
       </button>
     </li>
+    
   )
 }
 
