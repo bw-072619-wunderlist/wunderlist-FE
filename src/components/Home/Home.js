@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
 
-import Task from '../TaskComponent.js/Task'
+import Task from '../TaskComponent/Task'
 
 const Home = () => {
   const [EverythingState, setEverythingState] = useState([]);

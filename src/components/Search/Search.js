@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 // import AxiosWithAuth from '../../utils/AxiosWithAuth'
 
+import Task from '../TaskComponent/Task'
+
 const Search = ({ filteredTasks, query }) => {
 
   console.log('search props :', filteredTasks)
@@ -11,14 +13,7 @@ const Search = ({ filteredTasks, query }) => {
       <div>
         <ul>
           {filteredTasks.map(task => (
-            <li className="fluid-list">
-              <button className={
-                task.completed ? 'checkbox checked' : 'checkbox unchecked'
-              }>
-                <i className='fas fa-check fa-sm'></i>
-              </button>
-              <Link to={`task/${task.id}`}>{task.title}</Link>
-            </li>
+            <><Task task={task} /></>
           ))}
         </ul>
       </div>
@@ -29,3 +24,13 @@ const Search = ({ filteredTasks, query }) => {
 }
 
 export default Search
+
+
+{/* <li className="fluid-list">
+              <button className={
+                task.completed ? 'checkbox checked' : 'checkbox unchecked'
+              }>
+                <i className='fas fa-check fa-sm'></i>
+              </button>
+              <Link to={`task/${task.id}`}>{task.title}</Link>
+            </li> */}

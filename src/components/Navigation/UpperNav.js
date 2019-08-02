@@ -17,7 +17,7 @@ export default function NavBar(props) {
   // const [tasks, setTasks] = useState([])
 
   const handleChange = () => {
-      setShowSearch(!showSearch);
+    setShowSearch(!showSearch);
   }
 
   const searchHandler = (event) => {

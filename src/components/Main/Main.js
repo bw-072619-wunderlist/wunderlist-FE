@@ -43,6 +43,7 @@ const MainPage = (props) => {
   useEffect(() => {
     console.log('these are the Tasks:', tasks)
     if (searchTerm.length > 0) {
+      setFilteredTasks(tasks)
       setFilteredTasks(tasks.filter(task => task.title.includes(searchTerm)))
       props.history.push('/search')
     }
@@ -66,7 +67,7 @@ const MainPage = (props) => {
           )}
         />
         <PrivateRoute
-          path='/'
+          path='/home'
           component={props => (
             <Navbar submitSearch={submitSearch} header='HOME' />
           )}
@@ -78,7 +79,7 @@ const MainPage = (props) => {
         <PrivateRoute exact path='/home' component={(props) => <Home props={props} />} />
         <PrivateRoute exact path='/task/:id' component={(props) => <TaskDisplay match={props.match} />} />
         <PrivateRoute exact path='/calendar' component={CalendarDisplay} />
-        <PrivateRoute exact path='/search' component={(props) => <Search filteredTasks={filteredTasks} />} />
+        <PrivateRoute exact path='/search' component={(props) => <Search filteredTasks={filteredTasks} setFilteredTasks={setFilteredTasks} />} />
         <PrivateRoute exact path='/testing' component={Testing} />
       </div>
       {/* </TaskContext.Provider> */}
