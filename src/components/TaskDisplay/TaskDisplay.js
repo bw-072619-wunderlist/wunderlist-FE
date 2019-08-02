@@ -33,6 +33,7 @@ export default function TaskDisplay({ match }) {
 
     function addSubtask(subtask) { //TODO: Allow adding user-given items.
         setSubtasks(sortedSubtasks([...subtasks, subtask]));
+        setClasses({'addBtn': 'icon-btn', 'addForm': 'gone'});
     }
 
     const deleteSubtask = id => {
