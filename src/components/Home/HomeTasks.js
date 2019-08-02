@@ -10,6 +10,7 @@ const HomeTasks = (props) => {
     deleted: props.task.deleted,
     scheduled_at: props.task.scheduled_at
   })
+ 
 
   const [updateTask, setUpdate ] = useState({})
 

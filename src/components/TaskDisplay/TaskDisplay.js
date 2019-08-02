@@ -31,11 +31,14 @@ export default function TaskDisplay({ match }) {
     const [id, setID] = useState(match.params.id)
     const [openModal, setOpen] = useState(false)
     const [classes, setClasses] = useState({ 'addBtn': 'icon-btn', 'addForm': 'gone' });
+    const [users, setUsers] = useState([])
+    const [newUser, setNewUser] = useState('')
 
     const show = () => setOpen(true);
     const close = () => setOpen(false)
 
     console.log('props.match', match.params.id )
+    const parsedID = parseInt(match.params.id)
 
     function sortedSubtasks(unsorted) {
         function compareSubtasks(a, b) {
@@ -67,6 +70,21 @@ export default function TaskDisplay({ match }) {
     function toggleChecked() {
         setTask({ ...task, completed: !task.completed });
     }
+    const userHandler = (event) => {
+      setNewUser(event.target.value)
+    }
+
+    useEffect(() => {
+      AxiosWithAuth()
+        .get('https://wunderlist-be.herokuapp.com/api/v2/users')
+        .then(response => {
+          setUsers(response.data)
+        })
+        .catch(response => {
+          console.log(response)
+        })
+    }, [])
+    console.log(users)
 
     useEffect(() => {
         AxiosWithAuth()
@@ -86,7 +104,7 @@ export default function TaskDisplay({ match }) {
         console.log('this is newSubtask', newSubtask)
         if (newSubtask) {
             AxiosWithAuth()
-                .post(`https://wunderlist-be.herokuapp.com/api/v2/todos/${match.params.id}/tasks`, newSubtask)
+                .post(`https://wunderlist-be.herokuapp.com/api/v2/todos/${parsedID}/tasks`, [newSubtask])
                 .then(response => {
                     console.log(response.data)
                 })
@@ -147,11 +165,17 @@ export default function TaskDisplay({ match }) {
             {/* <form onSubmit={() => alert('add collaborator')}>
                 <label>
                     <h2>Add Collaborator:</h2>
-                    <input type="text" id="name" value={"fix this"} onChange={() => console.log('fix this too')} />
+                    <input 
+                    type="text" 
+                    name='newUser'
+                    value='newUser' 
+                    onChange={() => userHandler} />
                 </label>
             </form>
 
-            <h2>!!current collaborator!!</h2> */}
+            <h2>!!current collaborator!!</h2>
+            {/* This will need to be an if statement that checks to see if task.share has something in it
+            if it does, display those users, if not show that no users have been added. */} 
 
             <Modal size={'small'} open={openModal} onClose={close}>
                 <EditModal task={task} id={id} />

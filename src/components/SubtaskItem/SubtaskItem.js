@@ -17,16 +17,16 @@ export default ({ completed, name, id, delFunc }) => {
     console.log('toggleSubTask')
   }
 
-  useEffect(() => {
-    AxiosWithAuth()
-      .put(`https://wunderlist-be.herokuapp.com/api/v2/tasks/${id}`, subtask)
-      .then(response => {
-        console.log(response)
-      })
-      .catch(response => {
-        console.log(response)
-      })
-  }, [subtask]);
+  // useEffect(() => {
+  //   AxiosWithAuth()
+  //     .put(`https://wunderlist-be.herokuapp.com/api/v2/tasks/${id}`, subtask)
+  //     .then(response => {
+  //       console.log(response)
+  //     })
+  //     .catch(response => {
+  //       console.log(response)
+  //     })
+  // }, [subtask]);
 
   return (
     <li>

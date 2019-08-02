@@ -10,7 +10,7 @@ const Testing = () => {
 
     useEffect(() => {
         AxiosWithAuth()
-            .get('https://wunderlist-be.herokuapp.com/api/v2/todos')
+            .put('https://wunderlist-be.herokuapp.com/api/v2/todos/26/users/1')
             .then(response => {
                 console.log('test', response.data)
             })
