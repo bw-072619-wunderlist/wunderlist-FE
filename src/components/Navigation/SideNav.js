@@ -121,7 +121,7 @@ export default function AccordionExampleStandard(props) {
                 <Link onClick={signOut}>Sign Out</Link>
             </Accordion.Content>
             <Accordion.Title active={activeIndex === 1} index={1} onClick={handleClick}>
-                <Link to='/home'>HOME</Link>
+                <Link to='/'>HOME</Link>
                 </Accordion.Title>
             {/* <Accordion.Content active={activeIndex === 1}>
               </Accordion.Content> */}

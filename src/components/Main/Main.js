@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Switch } from 'react-router-dom'
+import { Switch, Redirect } from 'react-router-dom'
 import Navbar from '../Navigation/UpperNav';
 import AccordionExampleStandard from '../Navigation/SideNav';
 import Home from '../Home/Home';
@@ -22,6 +22,7 @@ const MainPage = (props) => {
   const [tasks, setTasks] = useState([])
   const [filteredTasks, setFilteredTasks] = useState([])
   const [searchTerm, setSearch] = useState('')
+  const token = localStorage.getItem('token')
 
   const submitSearch = (event, searching) => {
     event.preventDefault()
@@ -50,6 +51,10 @@ const MainPage = (props) => {
     console.log('checking when this hits')
   }, [searchTerm])
 
+  if (!token) {
+    <Redirect to='/login' />
+  }
+
   return (
     <div>
       {/* <TaskContext.Provider value={{ tasks }}> */}
@@ -76,7 +81,7 @@ const MainPage = (props) => {
       <div className="mainPage">
         <AccordionExampleStandard />
         {/* <Calendar /> */}
-        <PrivateRoute exact path='/home' component={(props) => <Home props={props} />} />
+        <PrivateRoute exact path='/' component={(props) => <Home props={props} />} />
         <PrivateRoute exact path='/task/:id' component={(props) => <TaskDisplay match={props.match} />} />
         <PrivateRoute exact path='/calendar' component={CalendarDisplay} />
         <PrivateRoute exact path='/search' component={(props) => <Search filteredTasks={filteredTasks} setFilteredTasks={setFilteredTasks} />} />

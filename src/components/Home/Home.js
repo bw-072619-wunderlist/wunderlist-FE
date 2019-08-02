@@ -6,10 +6,11 @@ import Task from '../TaskComponent/Task'
 
 const Home = () => {
   const [EverythingState, setEverythingState] = useState([]);
-
   const [sorted, setSorted] = useState([]);
+  const [token, setToken] = localStorage.getItem('token')
 
   const userData = JSON.parse(localStorage.getItem('data'))
+  const currentDate = 
 
   useEffect(() => {
     setSorted(EverythingState.sort(
@@ -43,6 +44,8 @@ const Home = () => {
         console.log(response)
       })
   }
+
+  
 
 
   //// TO DO FANCY DATE DISPLAY WITH TASKS
