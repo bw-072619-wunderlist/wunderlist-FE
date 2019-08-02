@@ -35,7 +35,7 @@ const Login = (props) => {
         // localStorage.setItem('token', response.data.token);
         localStorage.setItem('data', JSON.stringify(response.data));
       })
-      .then(props.history.push('/home'))
+      .then(props.history.push('/'))
       .catch(response => {
         console.log(response.error)
       })
@@ -48,7 +48,7 @@ const Login = (props) => {
   };
 
   if (token) {
-    return <Redirect to="/home" />;
+    return <Redirect to="/" />;
   }
 
   return (

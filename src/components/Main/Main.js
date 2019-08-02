@@ -13,6 +13,7 @@ import PrivateRoute from '../../utils/PrivateRoute';
 import '../../App.scss';
 import './main.scss';
 
+import Login from '../Login/Login'
 import TaskDisplay from '../TaskDisplay/TaskDisplay';
 import CalendarDisplay from '../Calendar/Calendar';
 import Search from '../Search/Search'
@@ -22,7 +23,6 @@ const MainPage = (props) => {
   const [tasks, setTasks] = useState([])
   const [filteredTasks, setFilteredTasks] = useState([])
   const [searchTerm, setSearch] = useState('')
-  const token = localStorage.getItem('token')
 
   const submitSearch = (event, searching) => {
     event.preventDefault()
@@ -51,10 +51,6 @@ const MainPage = (props) => {
     console.log('checking when this hits')
   }, [searchTerm])
 
-  if (!token) {
-    <Redirect to='/login' />
-  }
-
   return (
     <div>
       {/* <TaskContext.Provider value={{ tasks }}> */}
@@ -72,7 +68,7 @@ const MainPage = (props) => {
           )}
         />
         <PrivateRoute
-          path='/home'
+          path='/'
           component={props => (
             <Navbar submitSearch={submitSearch} header='HOME' />
           )}
