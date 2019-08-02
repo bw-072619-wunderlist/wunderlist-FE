@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from "react";
+
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
 
-export default function Home() {
+import HomeTasks from './HomeTasks'
+
+const Home = () => {
   const [EverythingState, setEverythingState] = useState([]);
 
-  //const [sorted, setSorted] = useState([]);
+  const [sorted, setSorted] = useState([]);
 
-  // useEffect(() => {
-  //   const sortedState = EverythingState.sort(
-  //     (a, b) => a.scheduled_at > b.scheduled_at
-  //   );
-  // }, [EverythingState]);
-  
+  const userData = JSON.parse(localStorage.getItem('data'))
+
+  useEffect(() => {
+    setSorted(EverythingState.sort(
+      (a, b) => a.scheduled_at > b.scheduled_at
+    ))
+  }, [EverythingState]);
   
   useEffect(() => {
     AxiosWithAuth()
@@ -30,24 +34,14 @@ export default function Home() {
 
   return (
     <div>
-      <div className="home-list">
-        <div
-          className={
-            EverythingState.completed
-              ? "checkbox checked"
-              : "checkbox unchecked"
-          }
-        >
-          <i className="fas fa-check fa-sm" />
-        </div>
-
-        <h1> Hi!{}, Here's your upcoming schedule... </h1>
-      <div>
-        {EverythingState.map(task => (
-          <div>{task.title}</div>
+      <h1> Hi {userData.username}! Here's your upcoming schedule... </h1>
+      <ul>
+        {sorted.map(task => (
+          <><HomeTasks task={task} /></>
         ))}
-      </div>
-      </div>
+      </ul>
     </div>
   );
 }
+
+export default Home

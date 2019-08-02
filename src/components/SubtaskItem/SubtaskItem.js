@@ -9,18 +9,6 @@ export default ({ completed, name, id, delFunc }) => {
   })
   const [userField, setUser] = useState('')
 
-  // const deleteSubTask = () => {
-  //   console.log(id)
-  //   AxiosWithAuth()
-  //     .delete(`https://wunderlist-be.herokuapp.com/api/v2/tasks/${id}`)
-  //     .then(response => {
-  //       console.log(response)
-  //     })
-  //     .catch(response => {
-  //       console.log(response)
-  //     })
-  // }
-
   const toggleSubTask = () => {
     setSubtask({
       ...subtask,

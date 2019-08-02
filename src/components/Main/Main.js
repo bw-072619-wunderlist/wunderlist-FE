@@ -75,11 +75,11 @@ const MainPage = (props) => {
       <div className="mainPage">
         <AccordionExampleStandard />
         {/* <Calendar /> */}
-        <PrivateRoute exact path='/' component={(props) => <Home />} />
-        <PrivateRoute path='/task/:id' component={(props) => <TaskDisplay match={props.match} />} />
-        <PrivateRoute path='/calendar' component={CalendarDisplay} />
-        <PrivateRoute path='/search' component={(props) => <Search filteredTasks={filteredTasks} />} />
-        <PrivateRoute path='/testing' component={Testing} />
+        <PrivateRoute exact path='/home' component={(props) => <Home props={props} />} />
+        <PrivateRoute exact path='/task/:id' component={(props) => <TaskDisplay match={props.match} />} />
+        <PrivateRoute exact path='/calendar' component={CalendarDisplay} />
+        <PrivateRoute exact path='/search' component={(props) => <Search filteredTasks={filteredTasks} />} />
+        <PrivateRoute exact path='/testing' component={Testing} />
       </div>
       {/* </TaskContext.Provider> */}
     </div>
