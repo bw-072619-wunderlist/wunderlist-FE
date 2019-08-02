@@ -1,62 +1,98 @@
-import React from 'react';
-import { withFormik, Form, Field } from 'formik';
-import * as Yup from 'yup';
+import React, { useState, useContext } from 'react';
+import { Redirect, Link } from 'react-router-dom'
 import axios from 'axios';
+import { Button, Form, Input } from 'semantic-ui-react';
+
+import { UserContext } from '../../contexts/UserContext';
 
 import './Login.scss';
 
-function Login({ touched, errors }) {
+const Login = (props) => {
+  console.log(props);
+
+  // const { user } = useContext(UserContext)
+
+  const [login, setLogin] = useState({
+    email: '',
+    password: ''
+  })
+
+  const [loading, setLoading] = useState(false)
+
+  const token = localStorage.getItem('token')
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    setLoading(true)
+    axios
+      .post('https://wunderlist-be.herokuapp.com/api/v2/auths/login', login)
+      .then(response => {
+        console.log(response)
+        setLoading(false)
+        localStorage.setItem('token', response.data.token)
+        const data = response.data;
+        console.log(data);
+        // localStorage.setItem('token', response.data.token);
+        localStorage.setItem('data', JSON.stringify(response.data));
+      })
+      // .then(props.history.push('/'))
+      .catch(response => {
+        console.log(response.error)
+      })
+  }
+
+  const handleChange = event => {
+    setLogin({
+      ...login,
+      [event.target.name]: event.target.value });
+  };
+
+  if (token) {
+    return <Redirect to="/" />;
+  }
 
   return (
-    <Form className="form">
-      <div className="form-group">
-        <label className="label">Username</label>
-        <Field
-          className="input"
-          name="username"
-          type="username"
-          autoComplete="off"
+    <div className='login-container'>
+      <div className='login-header'><h2>TASK</h2></div>
+      <div className='form-container'>
+        <Form
+          size="large"
+          onSubmit={handleSubmit}
+          loading={loading}
+          >
+        <h4>Welcome to TASK!</h4>
+        <Form.Input
+          fluid
+          placeholder="Email"
+          value={login.email}
+          name="email"
+          onChange={handleChange}
+          autoComplete='off'
         />
-        <p>{touched.username && errors.username}</p>
-      </div>
-      <div className="form-group">
-        <label className="label">Password</label>
-        <Field
-          className="input"
-          name="password"
+        <Form.Input
+          fluid
+          placeholder="Password"
+          value={login.password}
           type="password"
-          autoComplete="off"
+          name="password"
+          onChange={handleChange}
+          autoComplete='off'
         />
-      </div>
-      <p>{touched.password && errors.password}</p>
-      <button className="btn">Submit &larr;</button>
+        <Button
+          size="large"
+          loading={loading ? true : false}
+          disabled={loading ? true : false}
+          type="submit"
+        >
+        Sign In
+      </Button>
     </Form>
+    <div className='login-redirect'>
+        <Link className='login-link' to='/register'>New User? Register Here</Link>
+      </div>
+    </div>
+    </div>
   );
 }
 
-export default withFormik({
-  mapPropsToValues() {
-    return {
-      username: '',
-      password: ''
-    };
-  },
-  validationSchema: Yup.object().shape({
-    username: Yup.string()
-      .required()
-      .min(3),
-    password: Yup.string()
-      .required()
-      .min(6)
-  }),
-  handleSubmit(values, formikBag) {
-    axios
-      .post('/api/login', values)
-      .then((response) => {
-        formikBag.props.history.push('/');
-      })
-      .catch((e) => {
-        console.log(e.response.data);
-      });
-  }
-})(Login);
+export default Login
