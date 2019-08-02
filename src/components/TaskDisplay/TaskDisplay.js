@@ -12,7 +12,7 @@ export default function TaskDisplay({ match }) {
     const [subtasks, setSubtasks] = useState([]);
     const [task, setTask] = useState({})
     const [openModal, setOpen] = useState(false)
-    const [classes, setClasses] = useState({'addBtn': 'icon-btn', 'addForm': 'gone'});
+    const [classes, setClasses] = useState({ 'addBtn': 'icon-btn', 'addForm': 'gone' });
 
     const show = () => setOpen(true);
     const close = () => setOpen(false)
@@ -33,20 +33,24 @@ export default function TaskDisplay({ match }) {
 
     function addSubtask(subtask) {
         setSubtasks(sortedSubtasks([...subtasks, subtask]));
-        setClasses({'addBtn': 'icon-btn', 'addForm': 'gone'});
+        setClasses({ 'addBtn': 'icon-btn', 'addForm': 'gone' });
     }
 
     function deleteSubtask(id) {
         console.log(id)
         AxiosWithAuth()
-          .delete(`https://wunderlist-be.herokuapp.com/api/v2/tasks/${id}`)
-          .then(response => {
-            console.log(response)
-          })
-          .catch(response => {
-            console.log(response)
-          })
-      }
+            .delete(`https://wunderlist-be.herokuapp.com/api/v2/tasks/${id}`)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(response => {
+                console.log(response)
+            })
+    }
+
+    function toggleChecked() {
+        setTask({...task, completed: !task.completed});
+    }
 
     useEffect(() => {
         AxiosWithAuth()
@@ -64,9 +68,11 @@ export default function TaskDisplay({ match }) {
     return (
         <div>
             <div className='fluid-list'>
-                <button className={
-                    task.completed ? 'checkbox checked' : 'checkbox unchecked'
-                }>
+                <button
+                    onClick={toggleChecked}
+                    className={
+                        task.completed ? 'checkbox checked' : 'checkbox unchecked'}
+                >
                     <i className='fas fa-check fa-sm'></i>
                 </button>
                 <h1>hello world</h1>
@@ -81,7 +87,7 @@ export default function TaskDisplay({ match }) {
 
             <button
                 className={classes.addBtn}
-                onClick={() => setClasses({addBtn: 'gone', addForm: ''})}
+                onClick={() => setClasses({ addBtn: 'gone', addForm: '' })}
             >
                 <i class='fas fa-plus fa-lg'></i>
             </button>
