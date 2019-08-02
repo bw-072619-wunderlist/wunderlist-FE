@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import AxiosWithAuth from "../../utils/AxiosWithAuth";
 
-import HomeTasks from './HomeTasks'
+import Task from '../TaskComponent.js/Task'
 
 const Home = () => {
   const [EverythingState, setEverythingState] = useState([]);
@@ -54,7 +54,7 @@ const Home = () => {
       <h1> Hi {userData.username}! Here's your upcoming schedule... </h1>
       <ul>
         {sorted.map(task => (
-          <><HomeTasks task={task} deleteTask={deleteTask} /></>
+          <><Task task={task} deleteTask={deleteTask} /></>
         ))}
       </ul>
     </div>

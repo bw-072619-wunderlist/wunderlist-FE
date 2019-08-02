@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+
 import AxiosWithAuth from '../../utils/AxiosWithAuth';
 
 const HomeTasks = (props) => {
@@ -44,7 +46,7 @@ const HomeTasks = (props) => {
       <button onClick={toggleTask} className={
         task.completed ? 'checkbox checked' : 'checkbox unchecked'
       }><i className="fas fa-check fa-sm"></i></button>
-      <p>{props.task.title}</p>
+      <Link to={`/task/${props.task.id}`} ><p>{props.task.title}</p></Link>
       <button className='icon-btn' onClick={() => props.deleteTask(props.task.id)} >
         <i className="fas fa-times fa-lg"></i>
       </button>
