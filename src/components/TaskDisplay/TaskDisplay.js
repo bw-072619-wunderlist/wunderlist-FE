@@ -32,7 +32,7 @@ export default function TaskDisplay({ match }) {
     const [openModal, setOpen] = useState(false)
     const [classes, setClasses] = useState(
         {
-            'addBtn': 'icon-btn',
+            'addBtn': 'add-btn',
             'addForm': 'gone'
         });
     const [users, setUsers] = useState([])
@@ -59,7 +59,7 @@ export default function TaskDisplay({ match }) {
 
     function addSubtask(subtask) {
         setNewSubtask(subtask);
-        setClasses({ ...classes, addBtn: 'icon-btn', addForm: 'gone' });
+        setClasses({ ...classes, addBtn: 'add-btn', addForm: 'gone' });
     }
 
     function deleteSubtask(id) {
@@ -118,13 +118,14 @@ export default function TaskDisplay({ match }) {
             setSubtasks(sortedSubtasks([...subtasks, { ...newSubtask, id: subtasks.length }]));
         }
     }, [newSubtask])
-
+    console.log(subtasks)
     useEffect(() => {
         if (moribund !== null) {
             AxiosWithAuth()
                 .delete(`https://wunderlist-be.herokuapp.com/api/v2/tasks/${moribund}`)
                 .then(response => {
                     console.log('deleted', response)
+                    setSubtasks(subtasks.filter(subtask => subtask.id !== moribund));
                 })
                 .catch(response => {
                     console.log('delete failed', response)
@@ -167,9 +168,7 @@ export default function TaskDisplay({ match }) {
             <button
                 className={classes.addBtn}
                 onClick={() => setClasses({ ...classes, addBtn: 'gone', addForm: '' })}
-            >
-                <i class='fas fa-plus fa-lg'></i>
-            </button>
+            >+</button>
 
             <TextForm
                 fields={['name']}
@@ -178,22 +177,7 @@ export default function TaskDisplay({ match }) {
                 className={classes.addForm}
             />
 
-            {/* <form onSubmit={() => alert('add collaborator')}>
-                <label>
-                    <h2>Add Collaborator:</h2>
-                    <input 
-                    type="text" 
-                    name='newUser'
-                    value='newUser' 
-                    onChange={() => userHandler} />
-                </label>
-            </form>
-
-            <h2>!!current collaborator!!</h2>
-            {/* This will need to be an if statement that checks to see if task.share has something in it
-            if it does, display those users, if not show that no users have been added. */}
-
-            <h2>Add Collaborator:</h2>
+            {/* <h2>Add Collaborator:</h2>
 
             <TextForm
                 fields={['name']}
@@ -207,7 +191,7 @@ export default function TaskDisplay({ match }) {
                 {task.shares && users !== undefined ? task.shares.map(usrId => (
                     <li>{users.find(usr => usr.id === usrId).username}</li>
                 )) : <li>None</li>}
-            </ul>
+            </ul> */}
             
 
             <Modal size={'small'} open={openModal} onClose={close}>
