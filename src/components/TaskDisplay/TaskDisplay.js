@@ -31,12 +31,12 @@ export default function TaskDisplay({ match }) {
         return [...unsorted].sort(compareSubtasks);
     }
 
-    function addSubtask(subtask) { //TODO: Allow adding user-given items.
+    function addSubtask(subtask) {
         setSubtasks(sortedSubtasks([...subtasks, subtask]));
         setClasses({'addBtn': 'icon-btn', 'addForm': 'gone'});
     }
 
-    const deleteSubtask = id => {
+    function deleteSubtask(id) {
         console.log(id)
         AxiosWithAuth()
           .delete(`https://wunderlist-be.herokuapp.com/api/v2/tasks/${id}`)
