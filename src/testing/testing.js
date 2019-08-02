@@ -8,12 +8,12 @@ const Testing = () => {
 
     useEffect(() => {
         AxiosWithAuth()
-            .get('https://wunderlist-be.herokuapp.com/api/v2/users')
+            .get('https://wunderlist-be.herokuapp.com/api/v2/todos')
             .then(response => {
-                console.log(response.data)
+                console.log('test', response.data)
             })
             .catch(response => {
-                console.log(response)
+                console.log('test', response)
             })
     },[])
 

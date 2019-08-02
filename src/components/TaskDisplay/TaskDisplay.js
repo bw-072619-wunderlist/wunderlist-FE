@@ -8,6 +8,8 @@ import TaskModal from '../TaskModal/TaskModal';
 import SubtaskItem from '../SubtaskItem/SubtaskItem';
 import TextForm from '../TextForm/TextForm';
 
+import Testing from '../../testing/testing';
+
 export default function TaskDisplay({ match }) {
     const [subtasks, setSubtasks] = useState([]);
     const [moribund, setMoribund] = useState(null);
@@ -55,19 +57,26 @@ export default function TaskDisplay({ match }) {
             .get(`https://wunderlist-be.herokuapp.com/api/v2/todos/${match.id}`)
             .then(res => {
                 setSubtasks(sortedSubtasks(res.data.tasks));
-                console.log(res.data)
+                console.log('response: task', res.data)
                 setTask(res.data)
             })
             .catch(error => {
-                console.log(error)
+                console.log('task error', error)
             });
     }, []);
 
     useEffect(() => {
-        console.log('add new subtask to back-end with axios somehow')
         console.log('subtasks length', subtasks.length)
         if (newSubtask) {
-            setSubtasks(sortedSubtasks([...subtasks, {...newSubtask, id: subtasks.length}]));
+            AxiosWithAuth()
+                .post(`https://wunderlist-be.herokuapp.com/api/v2/todos/${match.id}/tasks`, newSubtask.name)
+                .then(response => {
+                    console.log(response.data)
+                })
+                .catch(response => {
+                    console.log(response)
+                })
+            setSubtasks(sortedSubtasks([...subtasks, { ...newSubtask, id: subtasks.length }]));
         }
     }, [newSubtask])
 
@@ -86,6 +95,7 @@ export default function TaskDisplay({ match }) {
 
     return (
         <div>
+            <Testing />
             <div className='fluid-list'>
                 <button
                     onClick={toggleChecked}
